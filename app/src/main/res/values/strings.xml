@@ -1,4 +1,21 @@
 <resources>
-    <string name="app_name">ProjetoES</string>
-    <string name="uau_ui">ProjetoES</string>
+
+    <string name="app_name">AppName</string>
+
+    <!-- Strings Texts -->
+    <string name="loginText">Login</string>
+    <string name="usernameText">Username:</string>
+    <string name="passwordText">Password</string>
+
+    <!-- Strings TextFields -->
+    <string name="usernameTextField">username</string>
+    <string name="nameTextField">name</string>
+
+    <!-- Strings Buttons -->
+    <string name="loginButton">Login</string>
+
+    <!-- Strings Links -->
+    <string name="forgotPasswordLink">I Forgot My Password</string>
+    <string name="newAccountLink">Create New Account</string>
+
 </resources>
