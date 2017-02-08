@@ -57,6 +57,6 @@
         style="@style/formButton"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
-        android:layout_marginBottom="25sp" />
+        android:layout_marginBottom="30sp" />
 
 </RelativeLayout>
