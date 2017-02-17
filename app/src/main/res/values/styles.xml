@@ -10,8 +10,7 @@
     </style>
 
     <style name="InputInfoText" parent="TextAppearance.AppCompat">
-        <item name="android:textColor">@color/lightGrey</item>
-        <item name="android:textStyle">italic</item>
+        <item name="android:textColor">@color/grey</item>
         <item name="android:fontFamily">sans-serif-condensed</item>
     </style>
 

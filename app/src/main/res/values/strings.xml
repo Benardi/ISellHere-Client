@@ -1,27 +1,23 @@
 <resources>
-
     <string name="app_name">Login on I Sell Here!</string>
 
-    <!-- Strings Texts -->
-    <string name="usernameText">Username:</string>
-    <string name="passwordText">Password:</string>
-
-    <!-- Strings TextFields -->
-    <string name="usernameTextField">username</string>
-    <string name="nameTextField">password</string>
-
-    <!-- Strings Buttons -->
-    <string name="loginButton">Login</string>
-
-    <!-- Strings Linkss -->
-    <string name="forgotPasswordLink">I Forgot My Password</string>
-    <string name="newAccountLink">Create New Account</string>
     <string name="title_activity_maps">Map</string>
     <string name="title_activity_content">ContentActivity</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
-    <string name="action_settings">Settings</string>
+    <string name="title_activity_main2">Main2Activity</string>
+
+    <!-- Login -->
+    <string name="new_to_i_sell_here">New to I Sell Here!?</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="login">Login</string>
+
+    <!-- Login and Registration -->
+    <string name="username">Username</string>
+    <string name="password">Password</string>
+
+    <!-- Registration -->
 
 </resources>
