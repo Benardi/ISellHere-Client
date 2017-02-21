@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Login on I Sell Here!</string>
+    <string name="app_name">I Sell Here!</string>
 
     <string name="title_activity_maps">Map</string>
     <string name="title_activity_content">ContentActivity</string>
@@ -10,6 +10,7 @@
     <string name="title_activity_main2">Main2Activity</string>
 
     <!-- Login -->
+    <string name="login_title">Login On I Sell Here!"</string>
     <string name="new_to_i_sell_here">New to I Sell Here!?</string>
     <string name="sign_up">Sign Up</string>
     <string name="login">Login</string>

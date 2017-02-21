@@ -1,12 +1,10 @@
 package com.example.grupoes.projetoes.activities;
 
+import android.graphics.PorterDuff;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
-import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -31,13 +29,16 @@ public class ContentActivity extends AppCompatActivity
      * See https://g.co/AppIndexing/AndroidStudio for more information.
      */
     private GoogleApiClient client;
+    private int selectedItem;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_content);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar.getBackground().setColorFilter(12333, PorterDuff.Mode.DARKEN);
         setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle("");
 
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -47,6 +48,7 @@ public class ContentActivity extends AppCompatActivity
         toggle.syncState();
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        onNavigationItemSelected(navigationView.getMenu().getItem(0).setChecked(true));
         navigationView.setNavigationItemSelectedListener(this);
         // ATTENTION: This was auto-generated to implement the App Indexing API.
         // See https://g.co/AppIndexing/AndroidStudio for more information.
@@ -88,22 +90,25 @@ public class ContentActivity extends AppCompatActivity
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
-        // Handle navigation view item clicks here.
+
         int id = item.getItemId();
 
-        if (id == R.id.nav_camera) {
-            Fragment f = new MapFragment();
-            FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-            ft.replace(R.id.container, f);
-            ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
-            ft.addToBackStack(null);
-            ft.commit();
+        FragmentTransaction fTransaction = getSupportFragmentManager().beginTransaction();
+        fTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
+        fTransaction.addToBackStack(null);
+        Fragment fragment = null;
+
+        if (selectedItem != id && id == R.id.nav_camera) {
+            fragment = new MapFragment();
+            getSupportActionBar().setTitle("Sales Map");
         } else if (id == R.id.nav_gallery) {
 
-        } else if (id == R.id.nav_slideshow) {
+        }
 
-        } else if (id == R.id.nav_manage) {
-
+        if (fragment != null) {
+            fTransaction.replace(R.id.container, fragment);
+            fTransaction.commit();
+            selectedItem = id;
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

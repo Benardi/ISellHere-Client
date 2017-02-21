@@ -1,84 +1,114 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/activity_login"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.example.grupoes.projetoes.activities.LoginActivity">
+    android:id="@+id/activity_login"
+    tools:context="com.example.grupoes.projetoes.activities.LoginActivity"
+    android:orientation="vertical">
 
-    <EditText
+    <include
+        layout="@layout/toolbar_init" />
+
+    <Space
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:inputType="textPassword"
-        android:ems="10"
-        android:id="@+id/passEditText"
-        android:layout_below="@+id/passwordEditText"
-        android:layout_alignParentStart="true" />
+        android:layout_height="20sp" />
 
-    <TextView
-        android:text="@string/new_to_i_sell_here"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/textView6"
-        tools:text="@string/new_to_i_sell_here"
-        android:textAppearance="@style/InputInfoText"
-        android:layout_above="@+id/signUpButton"
-        android:layout_centerHorizontal="true" />
-
-    <Button
-        android:text="@string/sign_up"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/signUpButton"
-        style="@style/Widget.AppCompat.Button.Borderless.Colored"
-        android:layout_alignParentBottom="true"
-        android:layout_alignStart="@+id/loginButton"
-        tools:text="@string/sign_up" />
-
-    <Button
-        android:text="@string/login"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/loginButton"
-        style="@style/formButton"
-        android:layout_marginBottom="22dp"
-        android:layout_above="@+id/textView6"
-        android:layout_centerHorizontal="true"
-        tools:text="@string/login" />
-
-    <EditText
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:inputType="textPersonName"
-        android:ems="10"
-        android:id="@+id/usernameEditText"
-        style="@style/Widget.AppCompat.Light.AutoCompleteTextView"
-        android:layout_below="@+id/usernameTextView"
-        android:layout_alignParentStart="true" />
+        android:layout_height="match_parent"
+        android:fillViewport="true">
 
-    <TextView
-        android:text="@string/password"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/passwordEditText"
-        android:layout_marginTop="27dp"
-        style="@style/InputInfoText"
-        android:layout_below="@+id/usernameEditText"
-        android:layout_alignParentStart="true"
-        tools:text="@string/password" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-    <TextView
-        android:text="@string/username"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/usernameTextView"
-        android:textAppearance="@style/InputInfoText"
-        tools:text="@string/username"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentStart="true" />
+            <TextView
+                android:text="@string/username"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/usernameTextView"
+                android:textAppearance="@style/InputInfoText"
+                android:layout_below="@+id/include2"
+                android:layout_alignParentStart="true"
+                tools:text="@string/username"
+                android:paddingLeft="5sp" />
 
-</RelativeLayout>
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textPersonName"
+                android:ems="10"
+                android:id="@+id/usernameEditText"
+                style="@style/Widget.AppCompat.Light.AutoCompleteTextView"
+                android:layout_above="@+id/loginButton"
+                android:layout_alignParentStart="true" />
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="20sp" />
+
+            <TextView
+                android:text="@string/password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/passwordEditText"
+                style="@style/InputInfoText"
+                tools:text="@string/password"
+                android:layout_above="@+id/usernameEditText"
+                android:layout_alignParentStart="true"
+                android:paddingLeft="5sp" />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textPassword"
+                android:ems="10"
+                android:id="@+id/passEditText"
+                android:layout_below="@+id/passwordEditText"
+                android:layout_alignParentStart="true" />
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="75sp" />
+
+            <Button
+                android:text="@string/login"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/loginButton"
+                android:layout_gravity="center_horizontal"
+                style="@style/formButton"
+                android:layout_above="@+id/textView6"
+                android:layout_centerHorizontal="true"
+                tools:text="@string/login" />
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="30sp" />
+
+            <TextView
+                android:text="@string/new_to_i_sell_here"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/textView6"
+                android:textAppearance="@style/InputInfoText"
+                android:layout_above="@+id/signUpButton"
+                android:layout_centerHorizontal="true"
+                android:layout_gravity="center_horizontal"
+                tools:text="@string/new_to_i_sell_here"/>
+
+            <Button
+                android:text="@string/sign_up"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/signUpButton"
+                style="@style/Widget.AppCompat.Button.Borderless.Colored"
+                android:layout_gravity="center_horizontal"
+                tools:text="@string/sign_up" />
+
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>
