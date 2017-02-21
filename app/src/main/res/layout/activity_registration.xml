@@ -113,7 +113,7 @@
                 android:text="Create"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/button2"
+                android:id="@+id/createButton"
                 style="@style/formButton"
                 android:layout_gravity="center_horizontal"/>
         </LinearLayout>
