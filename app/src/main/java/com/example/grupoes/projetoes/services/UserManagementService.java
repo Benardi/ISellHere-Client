@@ -3,7 +3,12 @@ package com.example.grupoes.projetoes.services;
 import android.app.IntentService;
 import android.content.Intent;
 import android.content.Context;
-import android.view.View;
+import android.os.Binder;
+import android.os.Bundle;
+import android.os.IBinder;
+import android.support.annotation.Nullable;
+import android.util.Log;
+import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.Response;
@@ -12,25 +17,69 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.example.grupoes.projetoes.ISellHereApplication;
 import com.example.grupoes.projetoes.activities.ContentActivity;
 import com.example.grupoes.projetoes.util.FrontendConstants;
+import com.example.grupoes.projetoes.util.RequestActions;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
-/**
- * An {@link IntentService} subclass for handling asynchronous task requests in
- * a service on a separate handler thread.
- * <p>
- * TODO: Customize class - update intent actions, extra parameters and static
- * helper methods.
- */
 public class UserManagementService extends IntentService {
     private static UserManagementService INSTANCE;
 
-    private static final String LOGIN_REQUEST = "com.example.grupoes.projetoes.services.action.LOGIN_REQUEST";
-    private static final String SIGNUP_REQUEST = "com.example.grupoes.projetoes.services.action.SIGNUP_REQUEST";
+   // private static String LOG_TAG = "BoundService";
+   // private IBinder mBinder = new MyBinder();
 
     public UserManagementService() {
+
         super(UserManagementService.class.getName());
+    }
+
+   /* @Override
+    public void onCreate() {
+        super.onCreate();
+
+        Log.v(LOG_TAG, "in onCreate");
+    }
+
+    @Override
+    public IBinder onBind(Intent intent) {
+        Log.v(LOG_TAG, "in onBind");
+        return super.onBind(intent);
+    }
+
+    @Override
+    public void onRebind(Intent intent) {
+        Log.v(LOG_TAG, "in onRebind");
+        super.onRebind(intent);
+    }
+
+    @Override
+    public boolean onUnbind(Intent intent) {
+        Log.v(LOG_TAG, "in onUnbind");
+        return super.onUnbind(intent);
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        Log.v(LOG_TAG, "in onDestroy");
+    }*/
+
+    @Override
+    protected void onHandleIntent(Intent intent) {
+        if (intent != null) {
+            final String action = intent.getAction();
+            System.out.println(action);
+            if (RequestActions.LOGIN.getName().equals(action)) {
+                final String username = intent.getStringExtra("username");
+                final String password = intent.getStringExtra("password");
+                handleLoginRequest(username, password);
+            } else if (RequestActions.SIGNUP.getName().equals(action)) {
+                final String username = intent.getStringExtra("username");
+                final String password = intent.getStringExtra("password");
+                final String email = intent.getStringExtra("email");
+                handleSignupRequest(username, email, password);
+            }
+        }
     }
 
     public static synchronized UserManagementService getInstance() {
@@ -42,8 +91,9 @@ public class UserManagementService extends IntentService {
     }
 
     public void startSignupRequest(Context context, String username, String email, String password) {
+        System.out.println("CHEGOU");
         Intent intent = new Intent(context, UserManagementService.class);
-        intent.setAction(UserManagementService.SIGNUP_REQUEST);
+        intent.setAction(RequestActions.SIGNUP.getName());
         intent.putExtra("username", username);
         intent.putExtra("email", email);
         intent.putExtra("password", password);
@@ -52,86 +102,72 @@ public class UserManagementService extends IntentService {
 
     public void startLoginRequest(Context context, String username, String password) {
         Intent intent = new Intent(context, UserManagementService.class);
-        intent.setAction(UserManagementService.LOGIN_REQUEST);
+        intent.setAction(RequestActions.SIGNUP.getName());
         intent.putExtra("username", username);
         intent.putExtra("password", password);
         context.startService(intent);
     }
 
-    @Override
-    protected void onHandleIntent(Intent intent) {
-        if (intent != null) {
-            final String action = intent.getAction();
-
-            if (LOGIN_REQUEST.equals(action)) {
-                final String username = intent.getStringExtra("username");
-                final String password = intent.getStringExtra("password");
-                handleLoginRequest(username, password);
-            } else if (SIGNUP_REQUEST.equals(action)) {
-                final String username = intent.getStringExtra("username");
-                final String password = intent.getStringExtra("password");
-                final String email = intent.getStringExtra("email");
-                handleSignupRequest(username, email, password);
-            }
-        }
-    }
-
     private void handleSignupRequest(String username, String password, String email) {
-        JSONObject body = new JSONObject();
-
         try {
-            body.put("username", username);
-            body.put("password", password);
-            body.put("email", email);
+            JSONObject requestBody = new JSONObject();
+
+            requestBody.put("username", username);
+            requestBody.put("password", password);
+            requestBody.put("email", email);
+
+            JsonObjectRequest request = new JsonObjectRequest(RequestActions.SIGNUP.getRequestMethod(),
+                                                              RequestActions.SIGNUP.getUrl(),
+                                                              requestBody,
+                    new Response.Listener<JSONObject>() {
+                        @Override
+                        public void onResponse(JSONObject response) {
+                            System.out.println("Signup Operation Completed!");
+                        }
+                    }, new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
+                            System.out.println(error.getMessage());
+                        }
+                    });
+
+            ISellHereApplication.getInstance().addToRequestQueue(request);
         } catch(JSONException e) {
             e.printStackTrace();
         }
-
-        JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, FrontendConstants.SIGNUP_REQUEST_URL, body,
-            new Response.Listener<JSONObject>() {
-                @Override
-                public void onResponse(JSONObject response) {
-                    System.out.println("Hello");
-                }
-            }, new Response.ErrorListener() {
-                @Override
-                public void onErrorResponse(VolleyError error) {
-                    System.out.println(error.getMessage());
-                }
-            });
-
-            ISellHereApplication.getInstance().addToRequestQueue(request);
     }
 
     private void handleLoginRequest(String username, String password) {
-        JSONObject body = new JSONObject();
-
         try {
-            body.put("username", username);
-            body.put("password", password);
+            JSONObject requestBody = new JSONObject();
+            requestBody.put("username", username);
+            requestBody.put("password", password);
+
+            JsonObjectRequest request = new JsonObjectRequest(RequestActions.LOGIN.getRequestMethod(),
+                                                              RequestActions.LOGIN.getUrl(),
+                                                              requestBody,
+                    new Response.Listener<JSONObject>() {
+                        @Override
+                        public void onResponse(JSONObject response) {
+                            Intent i = new Intent(getApplicationContext(), ContentActivity.class);
+                            startActivity(i);
+                        }
+                    },
+                    new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
+                            System.out.println(error.getMessage());
+                        }
+                    });
+            ISellHereApplication.getInstance().addToRequestQueue(request);
         } catch(JSONException e) {
             e.printStackTrace();
         }
-
-        JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, FrontendConstants.LOGIN_REQUEST_URL, body,
-                new Response.Listener<JSONObject>() {
-                    @Override
-                    public void onResponse(JSONObject response) {
-                        Intent i = new Intent(getApplicationContext(), ContentActivity.class);
-                        startActivity(i);
-                    }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        System.out.println(error.getMessage());
-                    }
-                });
-        ISellHereApplication.getInstance().addToRequestQueue(request);
     }
 
-    private void handleEditRequest(String oldPassword) {
-
+    public class MyBinder extends Binder {
+        UserManagementService getService() {
+            return UserManagementService.this;
+        }
     }
-
 }

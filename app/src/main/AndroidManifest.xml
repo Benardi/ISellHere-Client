@@ -24,9 +24,6 @@
             android:name=".activities.RegistrationActivity"
             android:parentActivityName=".activities.LoginActivity" />
         <activity
-            android:name=".activities.MapsActivity"
-            android:label="@string/title_activity_maps" />
-        <activity
             android:name=".activities.ContentActivity"
             android:label="@string/title_activity_content" />
 

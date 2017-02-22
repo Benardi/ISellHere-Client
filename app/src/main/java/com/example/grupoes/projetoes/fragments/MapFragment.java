@@ -1,4 +1,4 @@
-package com.example.grupoes.projetoes.activities.fragments;
+package com.example.grupoes.projetoes.fragments;
 
 import android.content.Context;
 import android.net.Uri;

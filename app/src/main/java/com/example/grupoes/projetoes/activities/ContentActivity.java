@@ -15,7 +15,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.example.grupoes.projetoes.R;
-import com.example.grupoes.projetoes.activities.fragments.MapFragment;
+import com.example.grupoes.projetoes.fragments.MapFragment;
 import com.google.android.gms.appindexing.Action;
 import com.google.android.gms.appindexing.AppIndex;
 import com.google.android.gms.appindexing.Thing;

@@ -65,6 +65,7 @@ public class RegistrationActivity extends AppCompatActivity {
                 String username = usernameEditText.getText().toString();
                 String password = passwordEditText.getText().toString();
                 String email = emailEditText.getText().toString();
+                System.out.println("HI THERE");
                 UserManagementService.getInstance().startSignupRequest(getApplicationContext(), username, password, email);
             }
         });
