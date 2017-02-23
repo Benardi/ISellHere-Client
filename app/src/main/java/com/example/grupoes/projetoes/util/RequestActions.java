@@ -13,7 +13,10 @@ public enum RequestActions {
            Request.Method.POST),
     SIGNUP("signup_request",
             FrontendConstants.SIGNUP_REQUEST_URL,
-            Request.Method.POST);
+            Request.Method.POST),
+    EDIT_USER("edit_user_request",
+              FrontendConstants.EDIT_USER_REQUEST_URL,
+              Request.Method.PUT);
 
     private String name;
     private String url;

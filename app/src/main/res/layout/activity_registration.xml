@@ -26,7 +26,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/emailTextView"
+                android:id="@+id/navheader_email_textview"
                 style="@style/InputInfoText"
                 android:text="Email"
                 android:layout_alignParentTop="true"
@@ -40,7 +40,7 @@
                 android:ems="10"
                 android:id="@+id/emailEditText"
                 style="@style/Widget.AppCompat.EditText"
-                android:layout_below="@+id/emailTextView"
+                android:layout_below="@+id/navheader_email_textview"
                 android:layout_alignParentStart="true" />
 
             <Space

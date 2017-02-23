@@ -9,22 +9,22 @@ import android.view.MenuInflater;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Button;
+import android.widget.Toast;
 
-import com.android.volley.AuthFailureError;
-import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonObjectRequest;
-import com.example.grupoes.projetoes.ISellHereApplication;
 import com.example.grupoes.projetoes.R;
-import com.example.grupoes.projetoes.util.FrontendConstants;
+import com.example.grupoes.projetoes.beans.LoginBean;
+import com.example.grupoes.projetoes.models.Session;
+import com.example.grupoes.projetoes.localstorage.SessionStorage;
+import com.example.grupoes.projetoes.request_handlers.UserManagementHandler;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.Map;
-
 public class LoginActivity extends AppCompatActivity {
+    private SessionStorage sessionStorage;
+
     private Button loginButton;
     private Button signUpButton;
     private EditText usernameEditText;
@@ -34,6 +34,8 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
+        sessionStorage = new SessionStorage(this);
 
         configureToolbar();
         captureComponents();
@@ -64,31 +66,48 @@ public class LoginActivity extends AppCompatActivity {
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                JSONObject body = new JSONObject();
+                String username = usernameEditText.getText().toString();
+                String password = passwordEditText.getText().toString();
+                System.out.println(username);
+                System.out.println(password);
+                LoginBean bodyData = new LoginBean(username, password);
 
-                try {
-                    body.put("username", usernameEditText.getText());
-                    body.put("password", passwordEditText.getText());
-                } catch(JSONException e) {
-                    e.printStackTrace();
-                }
-
-                JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, FrontendConstants.LOGIN_REQUEST_URL, body,
+                UserManagementHandler.getInstance().requestLogin(bodyData,
                         new Response.Listener<JSONObject>() {
+
                             @Override
                             public void onResponse(JSONObject response) {
-                                Intent i = new Intent(getApplicationContext(), ContentActivity.class);
-                                startActivity(i);
+                                try {
+                                    if (sessionStorage.isUserLoggedIn()) {
+                                        sessionStorage.clearData();
+                                    }
+
+                                    String token = response.getString("token");
+                                    String username = response.getJSONObject("user").getString("username");
+                                    String password = response.getJSONObject("user").getString("password");
+                                    String email = response.getJSONObject("user").getString("email");
+
+                                    Session session = new Session(token, username, password, email);
+                                    sessionStorage.createSession(session);
+
+                                    Intent i = new Intent(LoginActivity.this, ContentActivity.class);
+                                    startActivity(i);
+                                } catch(JSONException e) {
+                                    e.printStackTrace();
+                                }
+
                             }
+
                         },
                         new Response.ErrorListener() {
+
                             @Override
                             public void onErrorResponse(VolleyError error) {
-                                System.out.println(error.getMessage());
+                                error.printStackTrace();
+                                Toast.makeText(LoginActivity.this, "Not matching username or password.", Toast.LENGTH_LONG).show();
                             }
+
                         });
-                ISellHereApplication.getInstance().addToRequestQueue(request);
-                System.out.println("Executou");
             }
         });
 

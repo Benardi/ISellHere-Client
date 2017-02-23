@@ -25,10 +25,11 @@
         android:layout_height="wrap_content"
         android:paddingTop="10sp"
         android:text="Username"
-        android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+        android:id="@+id/navheader_username_textview" />
 
     <TextView
-        android:id="@+id/emailTextView"
+        android:id="@+id/navheader_email_textview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="email@host.com" />
