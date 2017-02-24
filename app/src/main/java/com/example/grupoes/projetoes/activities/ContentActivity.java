@@ -1,12 +1,10 @@
 package com.example.grupoes.projetoes.activities;
 
-import android.content.Intent;
 import android.graphics.PorterDuff;
-import android.net.Uri;
 import android.os.Bundle;
+import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
-import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -21,9 +19,7 @@ import com.example.grupoes.projetoes.R;
 import com.example.grupoes.projetoes.fragments.MapFragment;
 import com.example.grupoes.projetoes.fragments.SettingsFragment;
 import com.example.grupoes.projetoes.localstorage.SessionStorage;
-import com.google.android.gms.appindexing.Action;
 import com.google.android.gms.appindexing.AppIndex;
-import com.google.android.gms.appindexing.Thing;
 import com.google.android.gms.common.api.GoogleApiClient;
 
 public class ContentActivity extends AppCompatActivity
@@ -44,7 +40,6 @@ public class ContentActivity extends AppCompatActivity
         toolbar.getBackground().setColorFilter(12333, PorterDuff.Mode.DARKEN);
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("");
-
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
