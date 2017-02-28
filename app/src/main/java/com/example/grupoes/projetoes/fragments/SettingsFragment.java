@@ -1,6 +1,5 @@
 package com.example.grupoes.projetoes.fragments;
 
-import android.content.Intent;
 import android.support.v4.app.Fragment;
 import android.widget.Button;
 import android.os.Bundle;
@@ -14,10 +13,7 @@ import android.widget.Toast;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.example.grupoes.projetoes.R;
-import com.example.grupoes.projetoes.activities.LoginActivity;
-import com.example.grupoes.projetoes.activities.RegistrationActivity;
 import com.example.grupoes.projetoes.beans.EditUserBean;
-import com.example.grupoes.projetoes.beans.RegistrationBean;
 import com.example.grupoes.projetoes.localstorage.SessionStorage;
 import com.example.grupoes.projetoes.models.User;
 import com.example.grupoes.projetoes.request_handlers.UserManagementHandler;
@@ -64,8 +60,9 @@ public class SettingsFragment extends Fragment {
             public void onClick(View view) {
                 String username = usernameEditText.getText().toString();
                 String newPassword = newPasswordEditText.getText().toString();
+                String oldPassword = passwordEditText.getText().toString();
 
-                EditUserBean bodyData = new EditUserBean(username, newPassword);
+                EditUserBean bodyData = new EditUserBean(username, newPassword, oldPassword);
 
                 UserManagementHandler.getInstance().requestEdit(bodyData, new SessionStorage(SettingsFragment.this.getContext()).getToken(),
                         new Response.Listener<JSONObject>() {

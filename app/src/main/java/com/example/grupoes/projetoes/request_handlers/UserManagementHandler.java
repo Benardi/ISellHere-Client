@@ -63,8 +63,8 @@ public class UserManagementHandler {
         }
     }
 
-    public void requestEdit(EditUserBean bodyData,final  String token, Response.Listener<JSONObject> okResponse, Response.ErrorListener errorResponse) {
-        System.out.println(gsonBuilder.toJson(bodyData));
+    public void requestEdit(EditUserBean bodyData, final  String token, Response.Listener<JSONObject> okResponse, Response.ErrorListener errorResponse) {
+        System.out.println(gsonBuilder.toJson(bodyData) + "      asldkaskldjaskldjklasjdklasjdkljklssdadas");
 
         try {
             JsonObjectRequest request = new JsonObjectRequest(RequestActions.EDIT_USER.getRequestMethod(),

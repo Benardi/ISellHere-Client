@@ -1,0 +1,101 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.grupoes.projetoes.fragments.AddPointOfSaleFragment">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_weight="1"
+                android:layout_height="55sp" />
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_weight="1"
+                android:id="@+id/add_pos_image_imageview"
+                android:src="@drawable/default_thumbnail"
+                android:scaleType="fitCenter"
+                android:layout_height="250sp"
+                android:background="@color/cast_expanded_controller_background_color"
+                android:padding="0sp"
+                android:layout_marginLeft="0sp"
+                android:layout_marginRight="0sp" />
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:drawableTop="@drawable/ic_menu_camera"
+                android:id="@+id/add_pos_takepicture_button"
+                style="@style/Widget.AppCompat.Button" />
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_weight="1"
+                android:layout_height="15sp" />
+
+            <TextView
+                android:text="Name:"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/textView2"
+                android:layout_weight="1"
+                android:paddingLeft="5sp"
+                android:paddingRight="5sp" />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textPersonName"
+                android:ems="10"
+                android:id="@+id/add_pos_name_edittext"
+                android:layout_weight="1" />
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="10sp"
+                android:layout_weight="1" />
+
+            <TextView
+                android:text="Description:"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/textView3"
+                android:layout_weight="1"
+                android:paddingLeft="5sp"
+                android:paddingRight="5sp" />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textMultiLine"
+                android:ems="10"
+                android:id="@+id/add_pos_description_edittext"
+                android:layout_weight="1" />
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1" />
+
+            <Button
+                android:text="Create"
+                android:layout_height="wrap_content"
+                android:id="@+id/add_pos_create_button"
+                android:layout_gravity="center_horizontal"
+                style="@style/formButton"
+                android:layout_width="100sp" />
+        </LinearLayout>
+
+    </ScrollView>
+
+</FrameLayout>

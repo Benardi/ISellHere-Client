@@ -5,6 +5,8 @@
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
         android:name=".ISellHereApplication"
@@ -50,12 +52,13 @@
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
 
-        <activity android:name=".activities.ProductActivity" />
         <activity android:name=".activities.PointOfSaleActivity" />
         <activity android:name=".activities.MyEvaluationActivity" />
         <activity android:name=".activities.EvaluationsActivity" />
         <activity android:name=".activities.EditPointOfSaleActivity" />
-        <activity android:name=".activities.DeletePointOfSaleActivity"></activity>
+        <activity android:name=".activities.DeletePointOfSaleActivity" />
+        <activity android:name=".activities.NewPointOfSaleActivity" />
+        <activity android:name=".activities.EditProductActivity"></activity>
     </application>
 
 </manifest>

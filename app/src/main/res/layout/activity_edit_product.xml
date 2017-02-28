@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_edit_product"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="com.example.grupoes.projetoes.activities.EditProductActivity">
+
+    <ImageView
+        android:layout_width="168sp"
+        android:layout_height="128sp"
+        app:srcCompat="@drawable/cast_abc_scrubber_control_off_mtrl_alpha"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"
+        android:id="@+id/editImageProductView"
+        android:layout_marginBottom="15sp"
+        android:layout_marginStart="13sp"
+        android:layout_marginTop="15sp"
+        android:background="@android:drawable/ic_menu_camera" />
+
+    <Button
+        android:text="@string/editProductImagemButton"
+        android:layout_width="80sp"
+        android:layout_alignTop="@+id/editImageProductView"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="27dp"
+        android:layout_marginTop="32dp"
+        android:id="@+id/editProductImagemButton"
+        style="@style/formButton"
+        android:layout_height="60sp" />
+
+    <TextView
+        android:text="@string/editProductNameTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="78dp"
+        android:id="@+id/editProductNameTextView"
+        android:layout_below="@+id/editImageProductView"
+        android:layout_alignStart="@+id/editImageProductView" />
+
+    <TextView
+        android:text="@string/editPriceProductTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/editProductNameTextView"
+        android:layout_alignStart="@+id/editProductNameTextView"
+        android:layout_marginTop="29dp"
+        android:id="@+id/editPriceProductTextView" />
+
+    <TextView
+        android:text="@string/editDescriptionProductTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="18dp"
+        android:id="@+id/editDescriptionProductTextView"
+        android:layout_below="@+id/editPriceProductTextView"
+        android:layout_alignStart="@+id/editPriceProductTextView" />
+
+    <EditText
+        android:layout_width="128sp"
+        android:layout_height="33sp"
+        android:inputType="textPersonName"
+        android:ems="10"
+        android:id="@+id/editNameProductText"
+        android:layout_alignBottom="@+id/editProductNameTextView"
+        android:layout_toEndOf="@+id/editProductNameTextView"
+        android:layout_marginStart="12dp" />
+
+    <EditText
+        android:layout_width="300sp"
+        android:layout_height="80sp"
+        android:inputType="textPersonName"
+        android:ems="10"
+        android:layout_below="@+id/editDescriptionProductTextView"
+        android:layout_alignStart="@+id/editDescriptionProductTextView"
+        android:layout_marginTop="23dp"
+        android:id="@+id/editDescriptionProductText" />
+
+    <Button
+        android:text="@string/saveButtonEditProduct"
+        android:layout_width="80sp"
+        android:layout_height="50sp"
+        android:layout_above="@+id/editNameProductText"
+        android:layout_alignEnd="@+id/editProductImagemButton"
+        android:id="@+id/saveButtonEditProduct"
+        style="@style/formButton"/>
+
+    <EditText
+        android:layout_width="128sp"
+        android:layout_height="33sp"
+        android:inputType="textPersonName"
+        android:ems="10"
+        android:id="@+id/editPriceProductText"
+        android:layout_above="@+id/editDescriptionProductTextView"
+        android:layout_alignStart="@+id/editNameProductText" />
+</RelativeLayout>

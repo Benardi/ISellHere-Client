@@ -56,4 +56,25 @@
     <string name="passwordTextView">Password:</string>
     <string name="confirmButton">Confirm</string>
 
+    <!-- Product -->
+
+    <string name="editProductButton">Edit</string>
+    <string name="deleteProductButton">Delete</string>
+    <string name="productEvaluationsButton">Evaluations</string>
+    <string name="nameProductText">Name:</string>
+    <string name="priceProductText">Price:</string>
+    <string name="evaluationsProductText">Evaluations:</string>
+    <string name="descriptionsProductText">Description:</string>
+    <string name="nameProduct">name</string>
+    <string name="priceProduct">price</string>
+    <string name="evaluationProduct">evaluation</string>
+
+    <!-- Edit Product -->
+
+    <string name="editProductImagemButton">Send Image</string>
+    <string name="editProductNameTextView">Name:</string>
+    <string name="editPriceProductTextView">Price:</string>
+    <string name="editDescriptionProductTextView">Description:</string>
+    <string name="saveButtonEditProduct">Save</string>
+
 </resources>

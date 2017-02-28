@@ -1,0 +1,30 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.grupoes.projetoes.fragments.ViewMapFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+    <include
+        layout="@layout/fragment_map" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <android.support.design.widget.FloatingActionButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            app:fabSize="mini"
+            app:srcCompat="@drawable/ic_add_point_of_sale"
+            android:id="@+id/view_map_new_point_of_sale_floating_button"
+            app:backgroundTint="@color/wallet_holo_blue_light"
+            android:layout_marginBottom="15dp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="15dp" />
+    </RelativeLayout>
+
+</FrameLayout>

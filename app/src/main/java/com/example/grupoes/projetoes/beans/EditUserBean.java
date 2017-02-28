@@ -7,14 +7,16 @@ package com.example.grupoes.projetoes.beans;
 public class EditUserBean {
     private String user;
     private String newPassword;
+    private String oldPassword;
 
     public EditUserBean() {
 
     }
 
-    public EditUserBean(String user, String newPassword) {
+    public EditUserBean(String user, String newPassword, String oldPassword) {
         this.user = user;
         this.newPassword = newPassword;
+        this.oldPassword = oldPassword;
     }
 
     public String getUser() {
@@ -31,5 +33,13 @@ public class EditUserBean {
 
     public void setNewPassword(String password) {
         this.newPassword = password;
+    }
+
+    public String getOldPassword() {
+        return oldPassword;
+    }
+
+    public void setOldPassword(String oldPassword) {
+        this.oldPassword = oldPassword;
     }
 }

@@ -16,8 +16,10 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.example.grupoes.projetoes.R;
+import com.example.grupoes.projetoes.fragments.AddPointOfSaleFragment;
 import com.example.grupoes.projetoes.fragments.MapFragment;
 import com.example.grupoes.projetoes.fragments.SettingsFragment;
+import com.example.grupoes.projetoes.fragments.ViewMapFragment;
 import com.example.grupoes.projetoes.localstorage.SessionStorage;
 import com.google.android.gms.appindexing.AppIndex;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -99,15 +101,17 @@ public class ContentActivity extends AppCompatActivity
         Fragment fragment = null;
 
         if (selectedItem != id && id == R.id.nav_map) {
-            fragment = new MapFragment();
+            fragment = new ViewMapFragment();
             getSupportActionBar().setTitle("Sales Map");
-        } else if (id == R.id.nav_add_point_of_sale) {
-
         } else if (id == R.id.nav_settings) {
             //Intent i = new Intent(this, SettingsActivity.class);
             //startActivity(i);
             fragment = new SettingsFragment();
             getSupportActionBar().setTitle("Settings");
+        } else if (id == R.id.nav_signout) {
+            SessionStorage sessionStorage = new SessionStorage(this);
+            sessionStorage.logoutUser();
+            finish();
         }
 
         if (fragment != null) {

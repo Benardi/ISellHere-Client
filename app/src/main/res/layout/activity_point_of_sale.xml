@@ -5,132 +5,155 @@
     android:id="@+id/activity_point_of_sale"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.example.grupoes.projetoes.activities.PointOfSaleActivity">
 
-    <ImageView
-        app:srcCompat="@drawable/cast_abc_scrubber_control_off_mtrl_alpha"
-        android:layout_marginLeft="15sp"
-        android:id="@+id/imageView"
-        android:layout_marginStart="15sp"
-        android:layout_marginTop="13sp"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentStart="true"
-        android:layout_height="128sp"
-        android:layout_width="168sp"
-        android:background="@android:drawable/ic_menu_camera" />
+    <include
+        layout="@layout/toolbar_init" />
 
-    <TextView
-        android:text="@string/namePSText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        android:id="@+id/namePSText"
-        android:layout_below="@+id/imageView"
-        android:layout_alignStart="@+id/imageView"
-        style="@style/InputInfoText"/>
-
-    <TextView
-        android:text="@string/evaluationPSText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/evaluationPSText"
-        android:layout_below="@+id/namePSText"
-        android:layout_alignStart="@+id/namePSText"
-        android:layout_marginTop="19dp"
-        style="@style/InputInfoText"/>
-
-    <TextView
-        android:text="@string/descriptionPSText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/evaluationPSText"
-        android:layout_alignStart="@+id/evaluationPSText"
-        android:layout_marginTop="19dp"
-        android:id="@+id/descriptionPSText"
-        style="@style/InputInfoText"/>
-
-    <TextView
-        android:text="@string/pSEvaluation"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/evaluationPSText"
-        android:layout_toEndOf="@+id/descriptionPSText"
-        android:layout_marginStart="14dp"
-        android:id="@+id/pSEvaluation" />
-
-    <TextView
-        android:text="@string/pSName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/pSName"
-        android:layout_above="@+id/evaluationPSText"
-        android:layout_toEndOf="@+id/namePSText"
-        android:layout_marginStart="14dp" />
-
-    <TextView
-        android:layout_width="250sp"
-        android:layout_height="60sp"
-        android:layout_below="@+id/descriptionPSText"
-        android:layout_alignStart="@+id/descriptionPSText"
-        android:layout_marginTop="20dp"
-        android:id="@+id/pSDescription" />
-
-    <HorizontalScrollView
-        android:layout_width="350sp"
-        android:layout_height="120sp"
-        android:id="@+id/scrollItens"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentStart="true">
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical" />
-    </HorizontalScrollView>
+            android:orientation="vertical">
 
-    <android.support.design.widget.FloatingActionButton
-        android:layout_width="50sp"
-        android:layout_height="50sp"
-        android:clickable="true"
-        app:fabSize="mini"
-        app:srcCompat="@android:drawable/ic_input_add"
-        android:id="@+id/addProductButtonPS"
-        android:layout_marginStart="12dp"
-        android:layout_below="@+id/pSEvaluation"
-        android:layout_toEndOf="@+id/pSDescription" />
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="55sp" />
 
-    <Button
-        android:text="@string/deletePSButton"
-        android:layout_height="50sp"
-        android:id="@+id/deletePSButton"
-        android:layout_width="80sp"
-        style="@style/formButton"
-        android:layout_marginEnd="20dp"
-        android:layout_alignBottom="@+id/imageView"
-        android:layout_alignEnd="@+id/scrollItens" />
+            <ImageView
+                android:id="@+id/pos_imageview"
+                android:layout_width="match_parent"
+                android:background="@color/black"
+                android:layout_height="250sp"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true" />
 
-    <Button
-        android:text="@string/editPSButton"
-        android:id="@+id/editPSButton"
-        android:layout_width="80sp"
-        android:layout_height="50sp"
-        style="@style/formButton"
-        android:layout_alignTop="@+id/imageView"
-        android:layout_alignStart="@+id/deletePSButton"
-        android:layout_marginTop="12dp" />
+            <Button
+                android:text="@string/editPSButton"
+                android:id="@+id/pos_edit_button"
+                android:layout_height="50sp"
+                style="@style/formButton"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentStart="true"
+                android:layout_width="match_parent" />
 
-    <Button
-        android:text="@string/evaluationPSButton"
-        android:id="@+id/evaluationsPSButton"
-        style="@style/formButton"
-        android:layout_height="50sp"
-        android:layout_width="98sp"
-        android:layout_alignBaseline="@+id/pSName"
-        android:layout_alignBottom="@+id/pSName"
-        android:layout_alignStart="@+id/deletePSButton" />
+            <Button
+                android:text="@string/deletePSButton"
+                android:layout_height="50sp"
+                android:id="@+id/post_delete_button"
+                android:layout_width="match_parent"
+                style="@style/formButton"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentStart="true" />
 
+            <View style="@style/Divider"/>
+
+            <RelativeLayout
+                android:layout_width="fill_parent"
+                android:layout_height="?android:attr/listPreferredItemHeight"
+                android:padding="6dip"
+                android:layout_marginTop="39dp"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentStart="true">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignWithParentIfMissing="true"
+                    android:gravity="center_vertical"
+                    android:text="Name"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="26dip"
+                    android:ellipsize="marquee"
+                    android:text="NAME"
+                    android:textSize="12sp"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignParentStart="true"
+                    android:id="@+id/pos_name_textview" />
+
+            </RelativeLayout>
+
+            <View style="@style/Divider"/>
+
+            <RelativeLayout
+                android:layout_width="fill_parent"
+                android:layout_height="?android:attr/listPreferredItemHeight"
+                android:padding="6dip"
+                android:layout_marginTop="39dp"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentStart="true">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignWithParentIfMissing="true"
+                    android:gravity="center_vertical"
+                    android:text="Description"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="26dip"
+                    android:ellipsize="marquee"
+                    android:text="DESCRIPTION"
+                    android:textSize="12sp"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignParentStart="true"
+                    android:id="@+id/pos_description_textview" />
+
+            </RelativeLayout>
+
+            <View style="@style/Divider"/>
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="15sp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentTop="true"
+                android:layout_alignWithParentIfMissing="true"
+                android:gravity="center_vertical"
+                android:text="Products"
+                android:textSize="16sp" />
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="5sp" />
+
+            <HorizontalScrollView
+                android:layout_width="match_parent"
+                android:layout_height="120sp"
+                android:id="@+id/pos_products_scroll"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentStart="true">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical" />
+            </HorizontalScrollView>
+
+            <Button
+                android:text="Add Product"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/pos_add_product_button"
+                style="@style/formButton" />
+
+        </LinearLayout>
+
+    </ScrollView>
 </RelativeLayout>
