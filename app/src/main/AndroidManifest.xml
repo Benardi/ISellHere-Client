@@ -58,7 +58,8 @@
         <activity android:name=".activities.EditPointOfSaleActivity" />
         <activity android:name=".activities.DeletePointOfSaleActivity" />
         <activity android:name=".activities.NewPointOfSaleActivity" />
-        <activity android:name=".activities.EditProductActivity"></activity>
+        <activity android:name=".activities.EditProductActivity" />
+        <activity android:name=".activities.NewProductActivity"></activity>
     </application>
 
 </manifest>

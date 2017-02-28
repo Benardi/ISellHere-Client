@@ -7,7 +7,7 @@ package com.example.grupoes.projetoes.util;
 public class FrontendConstants {
     /* Request URLs */
     //public static final String SOURCE_REQUEST_URL = "https://isellhere.herokuapp.com";
-    public static final String SOURCE_REQUEST_URL = "http://192.168.25.133:8080";
+    public static final String SOURCE_REQUEST_URL = "http://192.168.2.107:8080";
     public static final String SERVER_REQUEST_URL = SOURCE_REQUEST_URL + "/server";
 
     public static final String AUTHENTICATION_REQUEST_URL = SERVER_REQUEST_URL + "/authentication";
@@ -22,4 +22,11 @@ public class FrontendConstants {
     public static final String EDIT_POINT_OF_SALE_REQUEST_URL = POINT_OF_SALE_REQUEST_URL + "/edit";
     public static final String DELETE_POINT_OF_SALE_REQUEST_URL = POINT_OF_SALE_REQUEST_URL + "/delete";
     public static final String GET_ALL_POINTS_OF_SALE_REQUEST_URL = POINT_OF_SALE_REQUEST_URL + "/getAllPoints";
+
+    public static final String PRODUCT_REQUEST_URL = SERVER_REQUEST_URL + "/product";
+    public static final String ADD_PRODUCT_REQUEST_URL = PRODUCT_REQUEST_URL + "/new";
+    public static final String EDIT_PRODUCT_REQUEST_URL = PRODUCT_REQUEST_URL + "/edit";
+    public static final String DELETE_PRODUCT_REQUEST_URL = PRODUCT_REQUEST_URL + "/delete";
+    public static final String GET_PRODUCTS_REQUEST_URL = PRODUCT_REQUEST_URL + "/getProducts";
+
 }

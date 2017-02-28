@@ -1,10 +1,10 @@
 package com.example.grupoes.projetoes.activities;
 
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
@@ -13,9 +13,12 @@ import android.widget.TextView;
 
 import com.example.grupoes.projetoes.R;
 import com.example.grupoes.projetoes.controllers.PointsController;
+import com.example.grupoes.projetoes.controllers.ProductController;
 import com.example.grupoes.projetoes.custom_callbacks.PointsOperationCallback;
 import com.example.grupoes.projetoes.models.PointOfSale;
-
+import com.example.grupoes.projetoes.models.Product;
+import com.example.grupoes.projetoes.util.ProductAdapter;
+import java.util.ArrayList;
 import java.util.List;
 
 public class PointOfSaleActivity extends AppCompatActivity {
@@ -24,21 +27,23 @@ public class PointOfSaleActivity extends AppCompatActivity {
 
     private Button editButton;
     private Button deleteButton;
-
+    private Button addProduct;
     private ImageView imageView;
 
     private PointOfSale pointOfSale;
+    private RecyclerView recyclerView;
+    private ProductAdapter adapter;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_point_of_sale);
 
-        final Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_init);
-        setSupportActionBar(toolbar);
-
         String pointName = getIntent().getExtras().getString("POINT_NAME");
         pointOfSale = PointsController.getInstance().findPointOfSaleByName(pointName);
+
+        ProductController.getInstance().getProducts(getApplicationContext(), pointName);
 
         getSupportActionBar().setTitle("Point of Sale");
 
@@ -52,12 +57,19 @@ public class PointOfSaleActivity extends AppCompatActivity {
         imageView = (ImageView) findViewById(R.id.pos_imageview);
         nameTextView = (TextView) findViewById(R.id.pos_name_textview);
         descriptionTextView = (TextView) findViewById(R.id.pos_description_textview);
+        addProduct = (Button) findViewById(R.id.pos_add_product_button);
     }
 
     private void configureComponents() {
         nameTextView.setText(pointOfSale.getName());
         descriptionTextView.setText(pointOfSale.getComment());
         imageView.setImageBitmap(pointOfSale.getImage());
+        recyclerView = (RecyclerView) findViewById(R.id.products_recyclerView);
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
+        List<Product> products = ProductController.getInstance().getProductsByPointOfSale(pointOfSale.getName());
+        adapter = new ProductAdapter(getApplicationContext(), products);
+        recyclerView.setAdapter(adapter);
 
         deleteButton.setOnClickListener(new View.OnClickListener() {
 
@@ -78,6 +90,16 @@ public class PointOfSaleActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent i = new Intent(PointOfSaleActivity.this, EditPointOfSaleActivity.class);
+                i.putExtra("POINT_NAME", pointOfSale.getName());
+                startActivity(i);
+            }
+        });
+
+        addProduct.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(PointOfSaleActivity.this,
+                        NewProductActivity.class);
                 i.putExtra("POINT_NAME", pointOfSale.getName());
                 startActivity(i);
             }

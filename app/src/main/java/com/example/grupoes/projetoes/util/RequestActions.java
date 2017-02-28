@@ -28,7 +28,19 @@ public enum RequestActions {
                          Request.Method.POST),
     GET_ALL_POINTS_OF_SALE("get_all_points_of_sale",
             FrontendConstants.GET_ALL_POINTS_OF_SALE_REQUEST_URL,
-            Request.Method.GET);
+            Request.Method.GET),
+    ADD_PRODUCT("add_product",
+            FrontendConstants.ADD_PRODUCT_REQUEST_URL,
+            Request.Method.POST),
+    EDIT_PRODUCT("edit_product",
+            FrontendConstants.EDIT_PRODUCT_REQUEST_URL,
+            Request.Method.POST),
+    DELETE_PRODUCT("delete_product",
+            FrontendConstants.DELETE_PRODUCT_REQUEST_URL,
+            Request.Method.POST),
+    GET_PRODUCTS("get_products",
+            FrontendConstants.GET_PRODUCTS_REQUEST_URL,
+            Request.Method.POST);
 
     private String name;
     private String url;
