@@ -14,6 +14,8 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
+        android:hardwareAccelerated="false"
+        android:largeHeap="true"
         android:theme="@style/ISellHereTheme">
         <activity
             android:name=".activities.LoginActivity"
@@ -59,7 +61,8 @@
         <activity android:name=".activities.DeletePointOfSaleActivity" />
         <activity android:name=".activities.NewPointOfSaleActivity" />
         <activity android:name=".activities.EditProductActivity" />
-        <activity android:name=".activities.NewProductActivity"></activity>
+        <activit android:name=".activities.NewProductActivity"/>
+        <activity android:name=".activities.ProductActivity"/>
     </application>
 
 </manifest>
