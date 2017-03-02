@@ -9,6 +9,8 @@ import com.example.grupoes.projetoes.ISellHereApplication;
 import com.example.grupoes.projetoes.beans.AddPointOfSaleBean;
 import com.example.grupoes.projetoes.beans.DeletePointOfSaleBean;
 import com.example.grupoes.projetoes.beans.EditPointOfSaleBean;
+import com.example.grupoes.projetoes.beans.SearchBean;
+import com.example.grupoes.projetoes.util.CustomJsonArrayRequest;
 import com.example.grupoes.projetoes.util.FrontendConstants;
 import com.example.grupoes.projetoes.util.RequestActions;
 import com.google.android.gms.maps.model.LatLng;
@@ -42,15 +44,15 @@ public class SearchHandler {
     }
 
 
-    public void requestSearchPointsOfSale(final String name, final LatLng userLocation, final String token, Response.Listener<JSONArray> okResponse, Response.ErrorListener errorResponse) {
-            JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET,
-                    FrontendConstants.SEARCH_REQUEST_URL + "/searchpoint/name=" + name + "&latitude=" + userLocation.latitude + "&longitude=" + userLocation.longitude + "&ray=" + "100000",
-                    null,
+    public void requestSearchPointsOfSale(SearchBean bodyData, final String token, Response.Listener<JSONArray> okResponse, Response.ErrorListener errorResponse) {
+        try {
+            CustomJsonArrayRequest request = new CustomJsonArrayRequest(RequestActions.SEARCH_POINTS_OF_SALE.getRequestMethod(),
+                    RequestActions.SEARCH_POINTS_OF_SALE.getUrl(),
+                    new JSONObject(gsonBuilder.toJson(bodyData)),
                     okResponse,
-                    errorResponse)
-            {
+                    errorResponse) {
                 @Override
-                public Map<String, String> getHeaders ()throws AuthFailureError {
+                public Map<String, String> getHeaders() throws AuthFailureError {
                     Map<String, String> headers = new HashMap<>();
                     String auth = "Bearer " + token;
                     headers.put("Content-Type", "application/json");
@@ -59,26 +61,32 @@ public class SearchHandler {
                 }
             };
 
-        ISellHereApplication.getInstance().addToRequestQueue(request);
+            ISellHereApplication.getInstance().addToRequestQueue(request);
+        } catch(JSONException e) {
+            e.printStackTrace();
+        }
     }
 
-    public void requestSearchProducts(final String name, final LatLng userLocation, final String token, Response.Listener<JSONArray> okResponse, Response.ErrorListener errorResponse) {
-        JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET,
-                FrontendConstants.SEARCH_REQUEST_URL + "/searchproductgeneral/name=" + name + "&latitude=" + userLocation.latitude + "&longitude=" + userLocation.longitude + "&ray=" + "100000",
-                null,
-                okResponse,
-                errorResponse)
-        {
-            @Override
-            public Map<String, String> getHeaders ()throws AuthFailureError {
-                Map<String, String> headers = new HashMap<>();
-                String auth = "Bearer " + token;
-                headers.put("Content-Type", "application/json");
-                headers.put("Authorization", auth);
-                return headers;
-            }
-        };
+    public void requestSearchProducts(SearchBean bodyData, final String token, Response.Listener<JSONArray> okResponse, Response.ErrorListener errorResponse) {
+        try {
+            CustomJsonArrayRequest request = new CustomJsonArrayRequest(RequestActions.SEARCH_PRODUCTS.getRequestMethod(),
+                    RequestActions.SEARCH_PRODUCTS.getUrl(),
+                    new JSONObject(gsonBuilder.toJson(bodyData)),
+                    okResponse,
+                    errorResponse) {
+                @Override
+                public Map<String, String> getHeaders() throws AuthFailureError {
+                    Map<String, String> headers = new HashMap<>();
+                    String auth = "Bearer " + token;
+                    headers.put("Content-Type", "application/json");
+                    headers.put("Authorization", auth);
+                    return headers;
+                }
+            };
 
-        ISellHereApplication.getInstance().addToRequestQueue(request);
+            ISellHereApplication.getInstance().addToRequestQueue(request);
+        } catch(JSONException e) {
+            e.printStackTrace();
+        }
     }
 }

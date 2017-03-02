@@ -62,13 +62,12 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.CustomVi
     }
 
 
-        class CustomViewHolder extends RecyclerView.ViewHolder {
-            public TextView textView;
+    class CustomViewHolder extends RecyclerView.ViewHolder {
+        public TextView textView;
 
-            public CustomViewHolder(View view) {
-                super(view);
-                this.textView = (TextView) view.findViewById(R.id.title_pos_product);
-            }
+        public CustomViewHolder(View view) {
+            super(view);
+            this.textView = (TextView) view.findViewById(R.id.title_pos_product);
         }
-
+    }
 }

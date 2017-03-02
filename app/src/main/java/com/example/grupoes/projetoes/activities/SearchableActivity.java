@@ -9,15 +9,17 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
-import android.widget.ArrayAdapter;
 
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.example.grupoes.projetoes.R;
+import com.example.grupoes.projetoes.beans.SearchBean;
 import com.example.grupoes.projetoes.localstorage.SessionStorage;
 import com.example.grupoes.projetoes.models.PointOfSale;
+import com.example.grupoes.projetoes.models.Product;
 import com.example.grupoes.projetoes.request_handlers.SearchHandler;
 import com.example.grupoes.projetoes.util.PointOfSaleAdapter;
+import com.example.grupoes.projetoes.util.ProductAdapter;
 import com.example.grupoes.projetoes.util.UtilOperations;
 import com.google.android.gms.maps.model.LatLng;
 
@@ -29,7 +31,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SearchableActivity extends AppCompatActivity {
-    private RecyclerView recyclerView;
+    private RecyclerView pointsOfSaleRecyclerView;
+    private RecyclerView productRecyclerView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,15 +42,16 @@ public class SearchableActivity extends AppCompatActivity {
         final Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_init);
         setSupportActionBar(toolbar);
 
-        recyclerView = (RecyclerView) findViewById(R.id.searchable_recycler_view);
-        recyclerView.setHasFixedSize(true);
+        pointsOfSaleRecyclerView = (RecyclerView) findViewById(R.id.searchable_recycler_view);
+        pointsOfSaleRecyclerView.setHasFixedSize(true);
+
+        productRecyclerView = (RecyclerView) findViewById(R.id.searchable_product_recycler_view);
+        productRecyclerView.setHasFixedSize(true);
 
         Intent intent = getIntent();
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
-        recyclerView.setLayoutManager(linearLayoutManager);
-
-
+        pointsOfSaleRecyclerView.setLayoutManager(linearLayoutManager);
 
         if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
             String query = intent.getStringExtra(SearchManager.QUERY);
@@ -60,15 +64,16 @@ public class SearchableActivity extends AppCompatActivity {
         SessionStorage storage = new SessionStorage(this);
         final List<PointOfSale> pointsOfSale = new ArrayList<>();
 
-        SearchHandler.getInstance().requestSearchPointsOfSale(query,
-                storage.getSessionLocation(),
+        SearchBean searchBean = new SearchBean(query, storage.getSessionLocation().latitude, storage.getSessionLocation().longitude, 100000);
+
+        SearchHandler.getInstance().requestSearchPointsOfSale(searchBean,
                 storage.getToken(),
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
                         try {
                             for (int i = 0; i < response.length(); i++) {
-                                PointOfSale pointOfSale = convertResponse((JSONObject) response.get(i));
+                                PointOfSale pointOfSale = convertPointOfSaleResponse((JSONObject) response.get(i));
                                 pointsOfSale.add(pointOfSale);
                             }
                         } catch (JSONException e) {
@@ -76,7 +81,7 @@ public class SearchableActivity extends AppCompatActivity {
                         }
 
                         PointOfSaleAdapter adapter = new PointOfSaleAdapter(SearchableActivity.this, pointsOfSale);
-                        recyclerView.setAdapter(adapter);
+                        pointsOfSaleRecyclerView.setAdapter(adapter);
 
                         Log.d("SEARCH_INFO", "QUERY: " + query + "   " + "RESULT LIST SIZE: " + adapter.getItemCount() + "   " + "RESULT");
                     }
@@ -88,9 +93,37 @@ public class SearchableActivity extends AppCompatActivity {
                     }
                 });
 
+        final List<Product> products = new ArrayList<>();
+
+        SearchHandler.getInstance().requestSearchProducts(searchBean,
+                storage.getToken(),
+                new Response.Listener<JSONArray>() {
+                    @Override
+                    public void onResponse(JSONArray response) {
+                        try {
+                            for (int i = 0; i < response.length(); i++) {
+                                Product product = convertProductResponse((JSONObject) response.get(i));
+                                products.add(product);
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
+                        ProductAdapter adapter = new ProductAdapter(SearchableActivity.this, products);
+                        productRecyclerView.setAdapter(adapter);
+
+                        Log.d("SEARCH_INFO", "QUERY: " + query + "   " + "RESULT LIST SIZE: " + adapter.getItemCount() + "   " + "RESULT");
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        error.printStackTrace();
+                    }
+                });
     }
 
-    private PointOfSale convertResponse(JSONObject responseElement) throws JSONException {
+    private PointOfSale convertPointOfSaleResponse(JSONObject responseElement) throws JSONException {
         String creator = responseElement.getString("creator");
         String name = responseElement.getString("name");
         String comment = responseElement.getString("comment");
@@ -101,6 +134,17 @@ public class SearchableActivity extends AppCompatActivity {
         LatLng position = new LatLng(longitude, latitude);
 
         return new PointOfSale(creator, name, comment, imageBitmap, position);
+    }
+
+    private Product convertProductResponse(JSONObject responseElement) throws JSONException {
+        String creator = responseElement.getString("creator");
+        String name = responseElement.getString("name");
+        String pointOfSale = responseElement.getString("pointOfSale");
+        String comment = responseElement.getString("comment");
+        String image = responseElement.getString("image");
+        double price = responseElement.getDouble("price");
+
+        return new Product(creator, pointOfSale, name, comment, price, image);
     }
 
     /*@Override

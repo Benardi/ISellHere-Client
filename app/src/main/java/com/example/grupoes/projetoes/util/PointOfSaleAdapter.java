@@ -47,10 +47,6 @@ public class PointOfSaleAdapter extends RecyclerView.Adapter<PointOfSaleAdapter.
         holder.descriptionTextView.setText(pointsOfSale.get(position).getComment());
     }
 
-    public PointOfSale getPointOfSaleAt(int i) {
-        return pointsOfSale.get(i);
-    }
-
     @Override
     public int getItemCount() {
         return pointsOfSale.size();

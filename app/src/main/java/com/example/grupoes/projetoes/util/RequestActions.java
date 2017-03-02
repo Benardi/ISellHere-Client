@@ -40,7 +40,13 @@ public enum RequestActions {
             Request.Method.POST),
     GET_PRODUCTS("get_products",
             FrontendConstants.GET_PRODUCTS_REQUEST_URL,
-            Request.Method.GET);
+            Request.Method.GET),
+    SEARCH_PRODUCTS("search_products",
+            FrontendConstants.SEARCH_PRODUCT_URL,
+            Request.Method.POST),
+    SEARCH_POINTS_OF_SALE("search_pointsofsale",
+            FrontendConstants.SEARCH_POINTOFSALE_URL,
+            Request.Method.POST);
 
     private String name;
     private String url;
