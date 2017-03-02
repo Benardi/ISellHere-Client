@@ -64,28 +64,33 @@ public class EditProductActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 ProductController.getInstance().editProduct(
-                        nameProduct,
+                        product.getProductName(),
                         productName.getText().toString(),
                         productDescription.getText().toString(), Double.valueOf(productPrice.getText().toString()),
                         ((BitmapDrawable) productImage.getDrawable()).getBitmap(),
-                        getApplicationContext()
-                );
+                        getApplicationContext());
+                finish();
             }
         });
     }
 
     private void configureComponents() {
-        productName = (EditText) findViewById(R.id.editNameProductText);
-        productImage = (ImageView) findViewById(R.id.editImageProductView);
-        productDescription = (EditText) findViewById(R.id.editDescriptionProductText);
-        productPrice = (EditText) findViewById(R.id.editPriceProductText);
-        buttonGetImageProduct = (Button) findViewById(R.id.editProductImagemButton);
-        save = (Button) findViewById(R.id.saveButtonEditProduct);
+        if(product != null){
+            productName = (EditText) findViewById(R.id.editNameProductText);
+            productImage = (ImageView) findViewById(R.id.editImageProductView);
+            productDescription = (EditText) findViewById(R.id.editDescriptionProductText);
+            productPrice = (EditText) findViewById(R.id.editPriceProductText);
+            buttonGetImageProduct = (Button) findViewById(R.id.editProductImagemButton);
+            save = (Button) findViewById(R.id.saveButtonEditProduct);
 
-        productName.setText(product.getProductName());
-        productPrice.setText(String.valueOf(product.getProductPrice()));
-        productImage.setImageBitmap(UtilOperations.StringToBitMap(product.getProductImage()));
-        productDescription.setText(product.getProductComment());
+            productName.setText(product.getProductName());
+            productPrice.setText(String.valueOf(product.getProductPrice()));
+
+            if(product.getProductImage() != null){
+                productImage.setImageBitmap(UtilOperations.StringToBitMap(product.getProductImage()));
+            }
+            productDescription.setText(product.getProductComment());
+        }
     }
 
     @Override

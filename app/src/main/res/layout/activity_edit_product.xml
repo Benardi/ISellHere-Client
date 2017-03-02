@@ -61,26 +61,6 @@
         android:layout_below="@+id/editPriceProductTextView"
         android:layout_alignStart="@+id/editPriceProductTextView" />
 
-    <EditText
-        android:layout_width="128sp"
-        android:layout_height="33sp"
-        android:inputType="textPersonName"
-        android:ems="10"
-        android:id="@+id/editNameProductText"
-        android:layout_alignBottom="@+id/editProductNameTextView"
-        android:layout_toEndOf="@+id/editProductNameTextView"
-        android:layout_marginStart="12dp" />
-
-    <EditText
-        android:layout_width="300sp"
-        android:layout_height="80sp"
-        android:inputType="textPersonName"
-        android:ems="10"
-        android:layout_below="@+id/editDescriptionProductTextView"
-        android:layout_alignStart="@+id/editDescriptionProductTextView"
-        android:layout_marginTop="23dp"
-        android:id="@+id/editDescriptionProductText" />
-
     <Button
         android:text="@string/saveButtonEditProduct"
         android:layout_width="80sp"
@@ -92,10 +72,30 @@
 
     <EditText
         android:layout_width="128sp"
-        android:layout_height="33sp"
+        android:layout_height="wrap_content"
         android:inputType="textPersonName"
         android:ems="10"
         android:id="@+id/editPriceProductText"
-        android:layout_above="@+id/editDescriptionProductTextView"
+        android:layout_alignBaseline="@+id/editPriceProductTextView"
+        android:layout_alignBottom="@+id/editPriceProductTextView"
         android:layout_alignStart="@+id/editNameProductText" />
+
+    <EditText
+        android:layout_width="128sp"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:ems="10"
+        android:id="@+id/editNameProductText"
+        android:layout_above="@+id/editPriceProductText"
+        android:layout_toEndOf="@+id/editProductNameTextView" />
+
+    <EditText
+        android:layout_width="300sp"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:ems="10"
+        android:id="@+id/editDescriptionProductText"
+        android:layout_below="@+id/editDescriptionProductTextView"
+        android:layout_alignStart="@+id/editDescriptionProductTextView"
+        android:layout_marginTop="11dp" />
 </RelativeLayout>

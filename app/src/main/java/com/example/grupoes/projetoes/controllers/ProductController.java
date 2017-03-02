@@ -3,6 +3,7 @@ package com.example.grupoes.projetoes.controllers;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -45,7 +46,7 @@ public class ProductController {
     private ProductController() {
 
     }
-    public void deleteProduct(String productName, Context context) {
+    public void deleteProduct(String productName, final Context context) {
         SessionStorage storage = new SessionStorage(context);
         String username = storage.getLoggedUser().getUsername();
         String token = storage.getToken();
@@ -61,6 +62,8 @@ public class ProductController {
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
+                        Log.d("DELETE_PRODUCT", "OK");
+                        Toast.makeText(context, "Product deleted.", Toast.LENGTH_LONG).show();
                     }
                 },
                 new Response.ErrorListener() {
@@ -68,19 +71,24 @@ public class ProductController {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         error.printStackTrace();
+                            if(error.networkResponse != null && error.networkResponse.data != null){
+                                VolleyError newError = new VolleyError(new String(error.networkResponse.data));
+                                Log.d("ERROR_MESSAGE", ""+newError);
+                            }                  }
                     }
 
-                });
+
+        );
     }
 
-    public void editProduct(final String productName, String newName, String productDescription, double productPrice, Bitmap productImage, Context context) {
+    public void editProduct(final String productName, String newName, String productDescription, double productPrice, Bitmap productImage, final Context context) {
         SessionStorage storage = new SessionStorage(context);
         String requester = storage.getLoggedUser().getUsername();
         String token = storage.getToken();
 
         String productImageStr = UtilOperations.bitMapToString(productImage);
 
-        EditProductBean bodyData = new EditProductBean(requester, newName, productDescription, productPrice, productImageStr, productName);
+        EditProductBean bodyData = new EditProductBean(requester, newName, productDescription,String.valueOf(productPrice), productImageStr, productName);
 
         ProductHandler.getInstance().requestEditProduct(bodyData, token,
                 new Response.Listener<JSONObject>() {
@@ -91,6 +99,8 @@ public class ProductController {
                             product.setProductName(response.getString("name"));
                             product.setProductComment(response.getString("comment"));
                             product.setProductImage((response.getString("image")));
+                            product.setProductPrice(response.getDouble("price"));
+                            Toast.makeText(context, "Product edited.", Toast.LENGTH_LONG).show();
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
@@ -102,11 +112,15 @@ public class ProductController {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         error.printStackTrace();
+                        if(error.networkResponse != null && error.networkResponse.data != null){
+                            VolleyError newError = new VolleyError(new String(error.networkResponse.data));
+                            Log.d("ERROR_MESSAGE", ""+newError);
+                        }
                     }
 
                 });
     }
-    public void getProducts(Context context, String pointOfSale) {
+    public void getProducts(final Context context, String pointOfSale) {
         products = new ArrayList<>();
         ProductHandler.getInstance().requestGetProducts(pointOfSale, new SessionStorage(context).getToken(),
                 new Response.Listener<JSONArray>() {
@@ -115,36 +129,34 @@ public class ProductController {
                         try {
                             for (int i = 0; i < response.length(); i++) {
                                 JSONObject object = response.getJSONObject(i);
-                                products.add(createProduct(object));
+                                String creator = object.getString("creator");
+                                String pointOfSale = object.getString("pointOfSale");
+                                String productName = object.getString("name");
+                                String productComment = object.getString("comment");
+                                double productPrice = object.getDouble("price");
+                                String productImage = object.getString("image");
+                                Product p = new Product(creator, pointOfSale, productName, productComment, productPrice, productImage);
+                                products.add(p);
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
                         Log.d("PRODUCTS", ""+products.size());
+                        Toast.makeText(context, "PRODUCTS OK", Toast.LENGTH_LONG);
                     }
                 },
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         error.printStackTrace();
+                        if(error.networkResponse != null && error.networkResponse.data != null){
+                            VolleyError newError = new VolleyError(new String(error.networkResponse.data));
+                            Log.d("ERROR_MESSAGE", ""+newError);
+                        }
                     }
                 });
     }
 
-    private Product createProduct(JSONObject object) {
-        try {
-            String creator = object.getString("creator");
-            String pointOfSale = object.getString("pointOfSale");
-            String productName = object.getString("productName");
-            String productComment = object.getString("productComment");
-            double productPrice = object.getDouble("productPrice");
-            String productImage = object.getString("productImage");
-            return new Product(creator, pointOfSale, productName, productComment, productPrice, productImage);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
 
 
     public Product findProductByName(String productName) {
@@ -166,5 +178,9 @@ public class ProductController {
             }
         }
         return productsList;
+    }
+
+    public List<Product> getProductsList(){
+        return products;
     }
 }

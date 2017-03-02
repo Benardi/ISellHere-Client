@@ -6,8 +6,8 @@ package com.example.grupoes.projetoes.util;
 
 public class FrontendConstants {
     /* Request URLs */
-    //public static final String SOURCE_REQUEST_URL = "https://isellhere.herokuapp.com";
-    public static final String SOURCE_REQUEST_URL = "http://192.168.2.107:8080";
+    public static final String SOURCE_REQUEST_URL = "https://isellhere.herokuapp.com";
+    //public static final String SOURCE_REQUEST_URL = "http://192.168.2.107:8080";
     public static final String SERVER_REQUEST_URL = SOURCE_REQUEST_URL + "/server";
 
     public static final String AUTHENTICATION_REQUEST_URL = SERVER_REQUEST_URL + "/authentication";

@@ -4,7 +4,8 @@ package com.example.grupoes.projetoes.beans;
  * Created by Hadrizia on 28/02/2017.
  */
 
-public class DeleteProductBean {
+public class
+DeleteProductBean {
     String requester;
     String productName;
 

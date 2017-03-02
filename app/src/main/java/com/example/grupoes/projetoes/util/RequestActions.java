@@ -34,13 +34,13 @@ public enum RequestActions {
             Request.Method.POST),
     EDIT_PRODUCT("edit_product",
             FrontendConstants.EDIT_PRODUCT_REQUEST_URL,
-            Request.Method.POST),
+            Request.Method.PUT),
     DELETE_PRODUCT("delete_product",
             FrontendConstants.DELETE_PRODUCT_REQUEST_URL,
             Request.Method.POST),
     GET_PRODUCTS("get_products",
             FrontendConstants.GET_PRODUCTS_REQUEST_URL,
-            Request.Method.POST);
+            Request.Method.GET);
 
     private String name;
     private String url;

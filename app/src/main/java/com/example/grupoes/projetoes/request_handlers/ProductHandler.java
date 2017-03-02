@@ -49,7 +49,7 @@ public class ProductHandler {
         try {
             JsonObjectRequest request = new JsonObjectRequest(RequestActions.ADD_PRODUCT.getRequestMethod(),
                     RequestActions.ADD_PRODUCT.getUrl(),
-                    new JSONObject(gsonBuilder.toJson(body)),
+                    new JSONObject(createProductBody(body)),
                     okResponse,
                     errorResponse)
             {
@@ -62,11 +62,22 @@ public class ProductHandler {
                     return headers;
                 }
             };
-            Log.d("ADD",""+ new JSONObject(gsonBuilder.toJson(body)));
+            Log.d("ADD",""+ new JSONObject(createProductBody(body)).getString("productPrice"));
             ISellHereApplication.getInstance().addToRequestQueue(request);
-        } catch(JSONException e) {
+        } catch(Exception e) {
             e.printStackTrace();
         }
+    }
+
+    private Map createProductBody(AddProductBean body) {
+        Map<String, String> hash = new HashMap<>();
+        hash.put("productImage", body.getProductImage());
+        hash.put("productPrice", String.valueOf(body.getProductPrice()));
+        hash.put("productName", body.getProductName());
+        hash.put("productComment", body.getProductComment());
+        hash.put("pointOfSale", body.getPointOfSale());
+        hash.put("creator", body.getCreator());
+        return  hash;
     }
 
     public void requestEditProduct(EditProductBean body, final String token, Response.Listener<JSONObject> okResponse, Response.ErrorListener errorResponse) {
@@ -86,6 +97,7 @@ public class ProductHandler {
                     return headers;
                 }
             };
+            Log.d("EDIT", ""+new JSONObject(gsonBuilder.toJson(body)));
             ISellHereApplication.getInstance().addToRequestQueue(request);
         } catch(JSONException e) {
 
@@ -110,6 +122,7 @@ public class ProductHandler {
                 }
             };
 
+            Log.d("DELETE",""+new JSONObject(gsonBuilder.toJson(body)));
             ISellHereApplication.getInstance().addToRequestQueue(request);
         } catch(JSONException e) {
             e.printStackTrace();
