@@ -168,7 +168,7 @@ public class PointsController {
     }
 
     private PointOfSale convertResponse(JSONObject responseElement) throws JSONException {
-        String creator = responseElement.getJSONObject("creator").getString("username");
+        String creator = responseElement.getString("creator");
         String name = responseElement.getString("name");
         String comment = responseElement.getString("comment");
         String image = responseElement.getString("image");

@@ -45,7 +45,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.CustomVi
 
             customViewHolder.textView.setText(item.getProductName());
 
-            customViewHolder.imageView.setOnClickListener(new View.OnClickListener() {
+            customViewHolder.textView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     Intent i = new Intent(mContext, ProductActivity.class);
@@ -62,12 +62,10 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.CustomVi
         }
 
         class CustomViewHolder extends RecyclerView.ViewHolder {
-            protected ImageView imageView;
             protected TextView textView;
 
             public CustomViewHolder(View view) {
                 super(view);
-                this.imageView = (ImageView) view.findViewById(R.id.thumbnail_pos_product);
                 this.textView = (TextView) view.findViewById(R.id.title_pos_product);
             }
         }

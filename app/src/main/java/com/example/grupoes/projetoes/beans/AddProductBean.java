@@ -9,12 +9,12 @@ public class AddProductBean {
     private String pointOfSale;
     private String productName;
     private String productComment;
-    private double productPrice;
+    private String productPrice;
     private String productImage;
 
     public AddProductBean(){}
 
-    public AddProductBean(String creator, String pointOfSale, String productName, String productComment, double productPrice, String productImage) {
+    public AddProductBean(String creator, String pointOfSale, String productName, String productComment, String productPrice, String productImage) {
         this.creator = creator;
         this.pointOfSale = pointOfSale;
         this.productName = productName;
@@ -31,11 +31,11 @@ public class AddProductBean {
         this.productImage = productImage;
     }
 
-    public double getProductPrice() {
+    public String getProductPrice() {
         return productPrice;
     }
 
-    public void setProductPrice(double productPrice) {
+    public void setProductPrice(String productPrice) {
         this.productPrice = productPrice;
     }
 

@@ -13,6 +13,7 @@ import com.example.grupoes.projetoes.beans.EditProductBean;
 import com.example.grupoes.projetoes.controllers.PointsController;
 import com.example.grupoes.projetoes.controllers.ProductController;
 import com.example.grupoes.projetoes.models.Product;
+import com.example.grupoes.projetoes.util.UtilOperations;
 
 /**
  * Created by Hadrizia on 28/02/2017.
@@ -43,6 +44,7 @@ public class ProductActivity extends AppCompatActivity {
         Intent i = getIntent();
         final String productName = i.getExtras().getString("PRODUCT_NAME");
         product = ProductController.getInstance().findProductByName(productName);
+        configureComponents();
 
         editProduct.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -60,8 +62,16 @@ public class ProductActivity extends AppCompatActivity {
             }
         });
 
-
-
     }
 
+    private void configureComponents() {
+        if(product != null) {
+            productName.setText(product.getProductName());
+            productPrice.setText(String.valueOf(product.getProductPrice()));
+            productDescription.setText(product.getProductComment());
+            if(product.getProductImage() != null){
+                productImage.setImageBitmap(UtilOperations.StringToBitMap(product.getProductImage()));
+            }
+        }
+    }
 }

@@ -8,13 +8,13 @@ public class EditProductBean {
     String requester;
     String productName;
     String productComment;
-    double productPrice;
+    String productPrice;
     String productImage;
     String selectedProduct;
 
     public EditProductBean(){}
 
-    public EditProductBean(String requester, String productName, String productComment, double productPrice, String productImage, String selectedProduct) {
+    public EditProductBean(String requester, String productName, String productComment, String productPrice, String productImage, String selectedProduct) {
         this.requester = requester;
         this.productName = productName;
         this.productComment = productComment;
@@ -47,11 +47,11 @@ public class EditProductBean {
         this.productComment = productComment;
     }
 
-    public double getProductPrice() {
+    public String getProductPrice() {
         return productPrice;
     }
 
-    public void setProductPrice(double productPrice) {
+    public void setProductPrice(String productPrice) {
         this.productPrice = productPrice;
     }
 

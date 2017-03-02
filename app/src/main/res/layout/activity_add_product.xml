@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_add_product"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="com.example.grupoes.projetoes.activities.AddProductActivity">
+
+    <include
+        layout="@layout/toolbar_init" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:id="@+id/product_image"
+                android:src="@drawable/default_thumbnail"
+                android:layout_height="250sp"
+                android:scaleType="centerCrop"/>
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:drawableTop="@drawable/ic_menu_gallery"
+                android:id="@+id/add_gallery_button"
+                android:layout_below="@+id/product_image"
+                android:backgroundTint="@android:color/transparent" />
+            <TextView
+                android:text="Name:"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/textView2"
+                android:layout_below="@+id/add_gallery_button"
+                android:paddingLeft="5sp"
+                android:paddingRight="5sp" />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textPersonName"
+                android:ems="10"
+                android:layout_below="@+id/textView2"
+                android:id="@+id/add_product_name"
+                android:layout_weight="1" />
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="10sp"
+                android:id="@+id/space1"
+                android:layout_below="@+id/add_product_name"/>
+
+            <TextView
+                android:text="Description:"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/textView3"
+                android:layout_below="@+id/space1"
+                android:paddingLeft="5sp"
+                android:paddingRight="5sp" />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textMultiLine"
+                android:ems="10"
+                android:id="@+id/add_product_description"
+                android:layout_below="@+id/textView3"/>
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="10sp"
+                android:id="@+id/space2"
+                android:layout_below="@+id/add_product_description"/>
+
+            <TextView
+                android:text="Price: "
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/textView4"
+                android:layout_below="@+id/space2"
+                android:paddingLeft="5sp"
+                android:paddingRight="5sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="R$ "
+                android:layout_below="@+id/textView4"
+                android:paddingLeft="5sp"
+                android:paddingRight="5sp"
+                android:paddingTop="10sp"
+                android:id="@+id/textView5"/>
+
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:inputType="textMultiLine"
+                android:ems="4"
+                android:id="@+id/add_product_price"
+                android:layout_below="@+id/textView4"
+                android:layout_toEndOf="@+id/textView5" />
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="10sp"
+                android:id="@+id/space3"
+                android:layout_below="@+id/add_product_price"/>
+
+            <Button
+                android:text="Create"
+                android:layout_height="wrap_content"
+                android:id="@+id/create_product_button"
+                style="@style/formButton"
+                android:layout_width="100sp"
+                android:layout_below="@+id/space3"
+                android:layout_centerHorizontal="true" />
+
+        </RelativeLayout>
+    </ScrollView>
+
+
+</RelativeLayout>

@@ -7,8 +7,10 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import com.example.grupoes.projetoes.R;
@@ -45,8 +47,6 @@ public class PointOfSaleActivity extends AppCompatActivity {
 
         ProductController.getInstance().getProducts(getApplicationContext(), pointName);
 
-        getSupportActionBar().setTitle("Point of Sale");
-
         captureComponents();
         configureComponents();
     }
@@ -61,49 +61,44 @@ public class PointOfSaleActivity extends AppCompatActivity {
     }
 
     private void configureComponents() {
-        nameTextView.setText(pointOfSale.getName());
-        descriptionTextView.setText(pointOfSale.getComment());
-        imageView.setImageBitmap(pointOfSale.getImage());
-        recyclerView = (RecyclerView) findViewById(R.id.products_recyclerView);
-        recyclerView.setHasFixedSize(true);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
-        List<Product> products = ProductController.getInstance().getProductsByPointOfSale(pointOfSale.getName());
-        adapter = new ProductAdapter(getApplicationContext(), products);
-        recyclerView.setAdapter(adapter);
+        if(pointOfSale != null) {
+            nameTextView.setText(pointOfSale.getName());
+            descriptionTextView.setText(pointOfSale.getComment());
+            imageView.setImageBitmap(pointOfSale.getImage());
+            deleteButton.setOnClickListener(new View.OnClickListener() {
 
-        deleteButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    PointsController.getInstance().deletePoint(pointOfSale.getName(), PointOfSaleActivity.this, new PointsOperationCallback() {
+                        @Override
+                        public void done(List<PointOfSale> pointsOfSale) {
+                            Intent i = new Intent(PointOfSaleActivity.this, ContentActivity.class);
+                            startActivity(i);
+                        }
+                    });
+                }
 
-            @Override
-            public void onClick(View view) {
-                PointsController.getInstance().deletePoint(pointOfSale.getName(), PointOfSaleActivity.this, new PointsOperationCallback() {
-                    @Override
-                    public void done(List<PointOfSale> pointsOfSale) {
-                        Intent i = new Intent(PointOfSaleActivity.this, ContentActivity.class);
-                        startActivity(i);
-                    }
-                });
-            }
+            });
 
-        });
+            editButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent i = new Intent(PointOfSaleActivity.this, EditPointOfSaleActivity.class);
+                    i.putExtra("POINT_NAME", pointOfSale.getName());
+                    startActivity(i);
+                }
+            });
 
-        editButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent i = new Intent(PointOfSaleActivity.this, EditPointOfSaleActivity.class);
-                i.putExtra("POINT_NAME", pointOfSale.getName());
-                startActivity(i);
-            }
-        });
-
-        addProduct.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i = new Intent(PointOfSaleActivity.this,
-                        NewProductActivity.class);
-                i.putExtra("POINT_NAME", pointOfSale.getName());
-                startActivity(i);
-            }
-        });
+            addProduct.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent i = new Intent(PointOfSaleActivity.this,
+                            AddProductActivity.class);
+                    i.putExtra("POINT_NAME", pointOfSale.getName());
+                    startActivity(i);
+                }
+            });
+        }
     }
 
 }
