@@ -3,10 +3,12 @@ package com.example.grupoes.projetoes.localstorage;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.location.Location;
 
 import com.example.grupoes.projetoes.activities.LoginActivity;
 import com.example.grupoes.projetoes.models.Session;
 import com.example.grupoes.projetoes.models.User;
+import com.google.android.gms.maps.model.LatLng;
 
 /**
  * Created by Wesley on 22/02/2017.
@@ -31,6 +33,17 @@ public class SessionStorage {
         editor.putString("token", session.getToken());
         editor.putBoolean("isLogged", true);
         editor.commit();
+    }
+
+    public void saveSessionLocation(Location location) {
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putFloat("latitude", (float) location.getLatitude());
+        editor.putFloat("longitude", (float) location.getLongitude());
+        editor.commit();
+    }
+
+    public LatLng getSessionLocation() {
+        return new LatLng(preferences.getFloat("latitude", 0F), preferences.getFloat("longitude", 0F));
     }
 
     public User getLoggedUser() {

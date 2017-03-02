@@ -68,6 +68,7 @@
     <string name="nameProduct">name</string>
     <string name="priceProduct">price</string>
     <string name="evaluationProduct">evaluation</string>
+    <string name="label_searchable">searchable</string>
 
     <!-- Edit Product -->
 

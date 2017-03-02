@@ -17,6 +17,9 @@
         android:largeHeap="true"
         android:supportsRtl="true"
         android:theme="@style/ISellHereTheme">
+
+        <meta-data android:name="android.app.default_searchable" android:value=".activities.SearchableActivity"/>
+
         <activity
             android:name=".activities.LoginActivity"
             android:launchMode="singleInstance">
@@ -33,7 +36,8 @@
         <activity
             android:name=".activities.ContentActivity"
             android:label="@string/title_activity_content"
-            android:launchMode="singleInstance" />
+            android:launchMode="singleInstance">
+        </activity>
 
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
@@ -65,7 +69,15 @@
         <activit android:name=".activities.NewProductActivity" />
 
         <activity android:name=".activities.ProductActivity" />
-        <activity android:name=".activities.AddProductActivity"></activity>
+        <activity android:name=".activities.AddProductActivity" />
+
+        <activity android:name=".activities.SearchableActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.SEARCH" />
+            </intent-filter>
+            <meta-data android:name="android.app.searchable"
+                android:resource="@xml/searchable"/>
+        </activity>
     </application>
 
 </manifest>

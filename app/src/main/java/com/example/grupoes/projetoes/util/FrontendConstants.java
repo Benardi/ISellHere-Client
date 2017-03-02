@@ -29,4 +29,6 @@ public class FrontendConstants {
     public static final String DELETE_PRODUCT_REQUEST_URL = PRODUCT_REQUEST_URL + "/delete";
     public static final String GET_PRODUCTS_REQUEST_URL = PRODUCT_REQUEST_URL + "/getProducts";
 
+    public static final String SEARCH_REQUEST_URL = SERVER_REQUEST_URL + "/search";
+
 }

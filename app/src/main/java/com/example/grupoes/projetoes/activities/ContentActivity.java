@@ -1,31 +1,40 @@
 package com.example.grupoes.projetoes.activities;
 
+import android.Manifest;
+import android.app.SearchManager;
+import android.content.Context;
+import android.content.pm.PackageManager;
 import android.graphics.PorterDuff;
+import android.location.Location;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import com.example.grupoes.projetoes.R;
-import com.example.grupoes.projetoes.fragments.AddPointOfSaleFragment;
-import com.example.grupoes.projetoes.fragments.MapFragment;
 import com.example.grupoes.projetoes.fragments.SettingsFragment;
 import com.example.grupoes.projetoes.fragments.ViewMapFragment;
 import com.example.grupoes.projetoes.localstorage.SessionStorage;
 import com.google.android.gms.appindexing.AppIndex;
 import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.location.LocationServices;
 
 public class ContentActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+        implements NavigationView.OnNavigationItemSelectedListener, GoogleApiClient.ConnectionCallbacks {
 
     /**
      * ATTENTION: This was auto-generated to implement the App Indexing API.
@@ -33,6 +42,10 @@ public class ContentActivity extends AppCompatActivity
      */
     private GoogleApiClient client;
     private int selectedItem;
+
+    private ListView resultListView;
+
+    private static final int REQUEST_LOCATION = 199;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,7 +67,8 @@ public class ContentActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
         // ATTENTION: This was auto-generated to implement the App Indexing API.
         // See https://g.co/AppIndexing/AndroidStudio for more information.
-        client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
+        client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).addApi(LocationServices.API).addConnectionCallbacks(this).build();
+        setDefaultKeyMode(DEFAULT_KEYS_SEARCH_LOCAL);
     }
 
     @Override
@@ -71,6 +85,22 @@ public class ContentActivity extends AppCompatActivity
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.content, menu);
+
+       /* SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
+        SearchView searchView = (SearchView) menu.findItem(R.id.action_search).getActionView();
+        searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
+        searchView.setIconifiedByDefault(false);*/
+
+        SearchManager searchManager =
+                (SearchManager) getSystemService(Context.SEARCH_SERVICE);
+
+        SearchView searchView =
+                (SearchView) menu.findItem(R.id.action_search).getActionView();
+
+        searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
+        searchView.setIconifiedByDefault(false);
+        searchView.setSubmitButtonEnabled (true);
+
         return true;
     }
 
@@ -82,7 +112,9 @@ public class ContentActivity extends AppCompatActivity
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        if (id == R.id.action_search) {
+            Log.d("ONSEARCHREQEUSTED", "SEARCH WAS REQUEST");
+            onSearchRequested();
             return true;
         }
 
@@ -144,5 +176,27 @@ public class ContentActivity extends AppCompatActivity
         emailTextView.setText(storage.getLoggedUser().getEmail());
 
         client.connect();
+    }
+
+    @Override
+    public void onConnected(@Nullable Bundle bundle) {
+
+
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
+                != PackageManager.PERMISSION_GRANTED) {
+            // Check Permissions Now
+            ActivityCompat.requestPermissions(this,
+                    new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
+                    REQUEST_LOCATION);
+            Log.d("HELLO123", "HELLO");
+        }
+
+        SessionStorage storage = new SessionStorage(this);
+        storage.saveSessionLocation(LocationServices.FusedLocationApi.getLastLocation(client));
+    }
+
+    @Override
+    public void onConnectionSuspended(int i) {
+
     }
 }
