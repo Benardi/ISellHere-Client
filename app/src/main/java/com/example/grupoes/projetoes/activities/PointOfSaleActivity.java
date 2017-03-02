@@ -1,6 +1,9 @@
 package com.example.grupoes.projetoes.activities;
 
+import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -35,6 +38,7 @@ public class PointOfSaleActivity extends AppCompatActivity {
     private PointOfSale pointOfSale;
     private RecyclerView recyclerView;
     private ProductAdapter adapter;
+    LinearLayoutManager linearLayoutManager;
 
 
     @Override
@@ -45,7 +49,15 @@ public class PointOfSaleActivity extends AppCompatActivity {
         String pointName = getIntent().getExtras().getString("POINT_NAME");
         pointOfSale = PointsController.getInstance().findPointOfSaleByName(pointName);
 
-        ProductController.getInstance().getProducts(getApplicationContext(), pointName);
+        linearLayoutManager = new LinearLayoutManager(this);
+        linearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
+
+        new DownloadProducts().execute(pointName);
+
+        recyclerView = (RecyclerView) findViewById(R.id.products_recyclerView);
+        recyclerView.setLayoutManager(linearLayoutManager);
+        adapter = new ProductAdapter(getApplicationContext(), ProductController.getInstance().getProductsList());
+        recyclerView.setAdapter(adapter);
 
         captureComponents();
         configureComponents();
@@ -61,7 +73,7 @@ public class PointOfSaleActivity extends AppCompatActivity {
     }
 
     private void configureComponents() {
-        if(pointOfSale != null) {
+        if (pointOfSale != null) {
             nameTextView.setText(pointOfSale.getName());
             descriptionTextView.setText(pointOfSale.getComment());
             imageView.setImageBitmap(pointOfSale.getImage());
@@ -101,4 +113,28 @@ public class PointOfSaleActivity extends AppCompatActivity {
         }
     }
 
+
+    class DownloadProducts extends AsyncTask<String, Void, Void> {
+        ProgressDialog progressDialog;
+
+        @Override
+        protected Void doInBackground(String... pointofsale) {
+            ProductController.getInstance().getProducts(getApplicationContext(), pointofsale[0]);
+            return null;
+        }
+
+        @Override
+        protected void onPreExecute() {
+            progressDialog = new ProgressDialog(PointOfSaleActivity.this);
+            progressDialog.setMessage("Carregando");
+            progressDialog.show();
+        }
+
+        @Override
+        protected void onPostExecute(Void params) {
+            progressDialog.dismiss();
+        }
+
+
+    }
 }

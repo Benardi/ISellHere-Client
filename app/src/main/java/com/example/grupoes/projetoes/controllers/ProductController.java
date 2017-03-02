@@ -142,7 +142,6 @@ public class ProductController {
                             e.printStackTrace();
                         }
                         Log.d("PRODUCTS", ""+products.size());
-                        Toast.makeText(context, "PRODUCTS OK", Toast.LENGTH_LONG);
                     }
                 },
                 new Response.ErrorListener() {
