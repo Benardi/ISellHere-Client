@@ -20,6 +20,7 @@ import com.example.grupoes.projetoes.models.Product;
 import com.example.grupoes.projetoes.request_handlers.SearchHandler;
 import com.example.grupoes.projetoes.util.PointOfSaleAdapter;
 import com.example.grupoes.projetoes.util.ProductAdapter;
+import com.example.grupoes.projetoes.util.ProductSearchAdapter;
 import com.example.grupoes.projetoes.util.UtilOperations;
 import com.google.android.gms.maps.model.LatLng;
 
@@ -52,6 +53,11 @@ public class SearchableActivity extends AppCompatActivity {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         pointsOfSaleRecyclerView.setLayoutManager(linearLayoutManager);
+
+        Intent intent2 = getIntent();
+        LinearLayoutManager linearLayoutManager2 = new LinearLayoutManager(this);
+        linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+        productRecyclerView.setLayoutManager(linearLayoutManager2);
 
         if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
             String query = intent.getStringExtra(SearchManager.QUERY);
@@ -108,8 +114,8 @@ public class SearchableActivity extends AppCompatActivity {
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
-
-                        ProductAdapter adapter = new ProductAdapter(SearchableActivity.this, products);
+                        Log.d("REQUEST_REPONSE", products.size() + "");
+                        ProductSearchAdapter adapter = new ProductSearchAdapter(SearchableActivity.this, products);
                         productRecyclerView.setAdapter(adapter);
 
                         Log.d("SEARCH_INFO", "QUERY: " + query + "   " + "RESULT LIST SIZE: " + adapter.getItemCount() + "   " + "RESULT");
