@@ -1,29 +1,24 @@
 package com.example.grupoes.projetoes.activities;
 
-import android.app.ProgressDialog;
-import android.content.Context;
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.TextView;
 
 import com.example.grupoes.projetoes.R;
 import com.example.grupoes.projetoes.controllers.PointsController;
 import com.example.grupoes.projetoes.controllers.ProductController;
 import com.example.grupoes.projetoes.custom_callbacks.PointsOperationCallback;
-import com.example.grupoes.projetoes.models.PointOfSale;
 import com.example.grupoes.projetoes.models.Product;
+import com.example.grupoes.projetoes.tasks.DownloadProducts;
+import com.example.grupoes.projetoes.models.PointOfSale;
 import com.example.grupoes.projetoes.util.ProductAdapter;
-import java.util.ArrayList;
+
 import java.util.List;
 
 public class PointOfSaleActivity extends AppCompatActivity {
@@ -36,9 +31,6 @@ public class PointOfSaleActivity extends AppCompatActivity {
     private ImageView imageView;
 
     private PointOfSale pointOfSale;
-    private RecyclerView recyclerView;
-    private ProductAdapter adapter;
-    LinearLayoutManager linearLayoutManager;
 
 
     @Override
@@ -48,19 +40,9 @@ public class PointOfSaleActivity extends AppCompatActivity {
 
         String pointName = getIntent().getExtras().getString("POINT_NAME");
         pointOfSale = PointsController.getInstance().findPointOfSaleByName(pointName);
-
-        linearLayoutManager = new LinearLayoutManager(this);
-        linearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
-
-        new DownloadProducts().execute(pointName);
-
-        recyclerView = (RecyclerView) findViewById(R.id.products_recyclerView);
-        recyclerView.setLayoutManager(linearLayoutManager);
-        adapter = new ProductAdapter(getApplicationContext(), ProductController.getInstance().getProductsList());
-        recyclerView.setAdapter(adapter);
-
         captureComponents();
         configureComponents();
+        new DownloadProducts(this).execute(pointName);
     }
 
     private void captureComponents() {
@@ -77,6 +59,14 @@ public class PointOfSaleActivity extends AppCompatActivity {
             nameTextView.setText(pointOfSale.getName());
             descriptionTextView.setText(pointOfSale.getComment());
             imageView.setImageBitmap(pointOfSale.getImage());
+            LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getApplicationContext());
+            linearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
+            if (ProductController.getInstance().getProductsList() != null){
+                RecyclerView recyclerView = (RecyclerView) findViewById(R.id.products_recyclerView);
+                recyclerView.setLayoutManager(linearLayoutManager);
+                ProductAdapter adapter = new ProductAdapter(getApplicationContext(), ProductController.getInstance().getProductsList());
+                recyclerView.setAdapter(adapter);
+            }
             deleteButton.setOnClickListener(new View.OnClickListener() {
 
                 @Override
@@ -113,28 +103,4 @@ public class PointOfSaleActivity extends AppCompatActivity {
         }
     }
 
-
-    class DownloadProducts extends AsyncTask<String, Void, Void> {
-        ProgressDialog progressDialog;
-
-        @Override
-        protected Void doInBackground(String... pointofsale) {
-            ProductController.getInstance().getProducts(getApplicationContext(), pointofsale[0]);
-            return null;
-        }
-
-        @Override
-        protected void onPreExecute() {
-            progressDialog = new ProgressDialog(PointOfSaleActivity.this);
-            progressDialog.setMessage("Carregando");
-            progressDialog.show();
-        }
-
-        @Override
-        protected void onPostExecute(Void params) {
-            progressDialog.dismiss();
-        }
-
-
-    }
 }

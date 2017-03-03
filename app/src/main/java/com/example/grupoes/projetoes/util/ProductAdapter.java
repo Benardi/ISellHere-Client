@@ -44,8 +44,9 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.CustomVi
         final Product item = itens.get(i);
 
         customViewHolder.textView.setText(item.getProductName());
+        customViewHolder.imageView.setImageBitmap(UtilOperations.StringToBitMap(item.getProductImage()));
 
-        customViewHolder.textView.setOnClickListener(new View.OnClickListener() {
+        customViewHolder.imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(mContext, ProductActivity.class);
@@ -64,10 +65,12 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.CustomVi
 
     class CustomViewHolder extends RecyclerView.ViewHolder {
         public TextView textView;
+        public ImageView imageView;
 
         public CustomViewHolder(View view) {
             super(view);
             this.textView = (TextView) view.findViewById(R.id.title_pos_product);
+            this.imageView = (ImageView) view.findViewById(R.id.thumbnail_product_adapter);
         }
     }
 }

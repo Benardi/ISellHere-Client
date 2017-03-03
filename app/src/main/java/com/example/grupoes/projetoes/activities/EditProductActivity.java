@@ -39,7 +39,7 @@ public class EditProductActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_product);
 
-        Intent intent = getIntent();
+        final Intent intent = getIntent();
         final String nameProduct = intent.getExtras().getString("PRODUCT_NAME");
         product = ProductController.getInstance().findProductByName(nameProduct);
 
@@ -69,7 +69,9 @@ public class EditProductActivity extends AppCompatActivity {
                         productDescription.getText().toString(), Double.valueOf(productPrice.getText().toString()),
                         ((BitmapDrawable) productImage.getDrawable()).getBitmap(),
                         getApplicationContext());
-                finish();
+
+                Intent intent1 = new Intent(EditProductActivity.this, ProductActivity.class);
+                intent1.putExtra("PRODUCT_NAME", product.getProductName());
             }
         });
     }

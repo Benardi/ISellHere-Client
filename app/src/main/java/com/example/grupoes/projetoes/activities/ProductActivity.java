@@ -59,6 +59,8 @@ public class ProductActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 ProductController.getInstance().deleteProduct(productName, getApplicationContext());
+                Intent intent = new Intent(ProductActivity.this, PointOfSaleActivity.class);
+                intent.putExtra("POINT_NAME", product.getPointOfSale());
             }
         });
 
