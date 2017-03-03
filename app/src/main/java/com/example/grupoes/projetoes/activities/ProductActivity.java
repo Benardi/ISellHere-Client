@@ -1,8 +1,13 @@
 package com.example.grupoes.projetoes.activities;
 
+import android.app.Dialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -12,6 +17,7 @@ import com.example.grupoes.projetoes.R;
 import com.example.grupoes.projetoes.beans.EditProductBean;
 import com.example.grupoes.projetoes.controllers.PointsController;
 import com.example.grupoes.projetoes.controllers.ProductController;
+import com.example.grupoes.projetoes.models.PointOfSale;
 import com.example.grupoes.projetoes.models.Product;
 import com.example.grupoes.projetoes.util.UtilOperations;
 
@@ -55,12 +61,31 @@ public class ProductActivity extends AppCompatActivity {
             }
         });
 
+        final Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_init);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setTitle(product.getProductName());
+
         deleteProduct.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ProductController.getInstance().deleteProduct(productName, getApplicationContext());
-                Intent intent = new Intent(ProductActivity.this, PointOfSaleActivity.class);
-                intent.putExtra("POINT_NAME", product.getPointOfSale());
+                AlertDialog.Builder builder = new AlertDialog.Builder(ProductActivity.this);
+                builder.setMessage("Delete " + productName + " ?");
+                builder.setPositiveButton("DELETE", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface arg0, int arg1) {
+                        ProductController.getInstance().deleteProduct(productName, getApplicationContext());
+                        Intent intent = new Intent(ProductActivity.this, PointOfSaleActivity.class);
+                        intent.putExtra("POINT_NAME", product.getPointOfSale());
+                    }
+                });
+
+                builder.setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                finish();
+                            }
+                        });
+                AlertDialog alertDialog = builder.create();
+                alertDialog.show();
             }
         });
 
@@ -75,5 +100,26 @@ public class ProductActivity extends AppCompatActivity {
                 productImage.setImageBitmap(UtilOperations.StringToBitMap(product.getProductImage()));
             }
         }
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                // app icon in action bar clicked; go home
+                Intent intent = new Intent(this, PointOfSaleActivity.class);
+                intent.putExtra("POINT_NAME", product.getPointOfSale());
+                startActivity(intent);
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent i = new Intent(ProductActivity.this, PointOfSaleActivity.class);
+        i.putExtra("POINT_NAME", product.getPointOfSale());
+        startActivity(i);
     }
 }

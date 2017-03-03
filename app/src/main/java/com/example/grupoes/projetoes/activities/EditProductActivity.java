@@ -12,6 +12,8 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -45,6 +47,10 @@ public class EditProductActivity extends AppCompatActivity {
 
         configureComponents();
 
+        final Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_init);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setTitle("Edit "+ product.getProductName());
 
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, 2);
@@ -72,6 +78,7 @@ public class EditProductActivity extends AppCompatActivity {
 
                 Intent intent1 = new Intent(EditProductActivity.this, ProductActivity.class);
                 intent1.putExtra("PRODUCT_NAME", product.getProductName());
+                startActivity(intent1);
             }
         });
     }
@@ -114,5 +121,25 @@ public class EditProductActivity extends AppCompatActivity {
             ImageView imageView = (ImageView) findViewById(R.id.product_image);
             imageView.setImageBitmap(BitmapFactory.decodeFile(picturePath));
         }
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            // Respond to the action bar's Up/Home button
+            case android.R.id.home:
+                Intent intent = new Intent(EditProductActivity.this, ProductActivity.class);
+                intent.putExtra("PRODUCT_NAME", product.getProductName());
+                startActivity(intent);
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent i = new Intent(EditProductActivity.this, ProductActivity.class);
+        i.putExtra("PRODUCT_NAME", product.getProductName());
+        startActivity(i);
     }
 }

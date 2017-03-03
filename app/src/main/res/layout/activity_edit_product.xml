@@ -5,18 +5,18 @@
     android:id="@+id/activity_edit_product"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
+
     tools:context="com.example.grupoes.projetoes.activities.EditProductActivity">
+
+    <include
+        layout="@layout/toolbar_init"
+        android:id="@+id/include3"/>
 
     <ImageView
         android:layout_width="168sp"
         android:layout_height="128sp"
         app:srcCompat="@drawable/cast_abc_scrubber_control_off_mtrl_alpha"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentStart="true"
+        android:layout_below="@+id/include3"
         android:id="@+id/editImageProductView"
         android:layout_marginBottom="15sp"
         android:layout_marginStart="13sp"

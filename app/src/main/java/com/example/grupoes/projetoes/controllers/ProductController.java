@@ -141,7 +141,7 @@ public class ProductController {
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
-                        Log.d("PRODUCTS", ""+products.size());
+                        Toast.makeText(context, "Finish getProducts", Toast.LENGTH_LONG).show();
                     }
                 },
                 new Response.ErrorListener() {
