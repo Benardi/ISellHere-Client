@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -38,11 +39,27 @@ public class PointOfSaleActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_point_of_sale);
 
-        String pointName = getIntent().getExtras().getString("POINT_NAME");
+        final String pointName = getIntent().getExtras().getString("POINT_NAME");
+
+        final Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_init);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle(pointName);
+
+
+                LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getApplicationContext());
+                linearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
+                if (ProductController.getInstance().getProductsList() != null){
+                    RecyclerView recyclerView = (RecyclerView) findViewById(R.id.products_recyclerView);
+                    recyclerView.setLayoutManager(linearLayoutManager);
+                    ProductAdapter adapter = new ProductAdapter(PointOfSaleActivity.this, ProductController.getInstance().getProductsList());
+                    recyclerView.setAdapter(adapter);
+                }
+
+
         pointOfSale = PointsController.getInstance().findPointOfSaleByName(pointName);
         captureComponents();
         configureComponents();
-        new DownloadProducts(this).execute(pointName);
+        //new DownloadProducts(this).execute(pointName);
     }
 
     private void captureComponents() {
@@ -59,14 +76,6 @@ public class PointOfSaleActivity extends AppCompatActivity {
             nameTextView.setText(pointOfSale.getName());
             descriptionTextView.setText(pointOfSale.getComment());
             imageView.setImageBitmap(pointOfSale.getImage());
-            LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getApplicationContext());
-            linearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
-            if (ProductController.getInstance().getProductsList() != null){
-                RecyclerView recyclerView = (RecyclerView) findViewById(R.id.products_recyclerView);
-                recyclerView.setLayoutManager(linearLayoutManager);
-                ProductAdapter adapter = new ProductAdapter(getApplicationContext(), ProductController.getInstance().getProductsList());
-                recyclerView.setAdapter(adapter);
-            }
             deleteButton.setOnClickListener(new View.OnClickListener() {
 
                 @Override

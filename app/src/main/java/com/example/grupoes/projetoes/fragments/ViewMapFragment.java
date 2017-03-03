@@ -24,6 +24,7 @@ import com.example.grupoes.projetoes.R;
 import com.example.grupoes.projetoes.activities.NewPointOfSaleActivity;
 import com.example.grupoes.projetoes.activities.PointOfSaleActivity;
 import com.example.grupoes.projetoes.controllers.PointsController;
+import com.example.grupoes.projetoes.controllers.ProductController;
 import com.example.grupoes.projetoes.custom_callbacks.PointsOperationCallback;
 import com.example.grupoes.projetoes.localstorage.SessionStorage;
 import com.example.grupoes.projetoes.models.PointOfSale;
@@ -119,7 +120,7 @@ public class ViewMapFragment extends Fragment implements OnMapReadyCallback {
 
             @Override
             public boolean onMarkerClick(Marker marker) {
-                // Vai para PointOfSaleActivity
+                ProductController.getInstance().getProducts(getActivity().getApplicationContext(), marker.getTitle());
                 return false;
             }
 

@@ -72,4 +72,6 @@ public class Product {
     public void setProductImage(String productImage) {
         this.productImage = productImage;
     }
+
+
 }

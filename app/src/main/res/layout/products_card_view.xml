@@ -18,6 +18,7 @@
             android:layout_height="90sp"
             android:scaleType="centerCrop"
             android:src="@drawable/default_thumbnail"
+            android:clickable="true"
             android:id="@+id/thumbnail_product_adapter"/>
 
         <TextView
@@ -26,7 +27,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:maxLines="1"
-            android:clickable="true"
             android:layout_below="@+id/thumbnail_product_adapter" />
 
     </RelativeLayout>
