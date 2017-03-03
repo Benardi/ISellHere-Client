@@ -24,6 +24,8 @@ public class DownloadProducts extends AsyncTask<String, String, String> {
         String result = null;
         try {
             ProductController.getInstance().getProducts(context, pointofsale[0]);
+            Thread.sleep(2000);
+
         }catch (Exception e){
             e.printStackTrace();
         }finally {
