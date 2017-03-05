@@ -36,7 +36,6 @@ public class NewPointOfSaleActivity extends AppCompatActivity {
     }
 
     public void showAddPointOfSaleFragment(LatLng position) {
-
         FragmentTransaction fTransaction = getSupportFragmentManager().beginTransaction();
         fTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
         fTransaction.addToBackStack(null);
@@ -44,5 +43,12 @@ public class NewPointOfSaleActivity extends AppCompatActivity {
         fTransaction.replace(R.id.newpos_container, fragment);
         fTransaction.commit();
         getSupportActionBar().setTitle("Inform Details...");
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent i = new Intent(NewPointOfSaleActivity.this, ContentActivity.class);
+        startActivity(i);
+        finish();
     }
 }

@@ -67,7 +67,7 @@ public class ProductSearchAdapter extends RecyclerView.Adapter<ProductSearchAdap
 
         @Override
         public void onClick(View view) {
-            Intent i = new Intent(context, PointOfSaleActivity.class);
+            Intent i = new Intent(context, ProductActivity.class);
             i.putExtra("PRODUCT_NAME", nameTextView.getText());
             context.startActivity(i);
         }

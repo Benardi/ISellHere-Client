@@ -100,19 +100,15 @@ public class AddPointOfSaleFragment extends Fragment {
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        System.out.println("JUREMA");
         if (requestCode == REQUEST_CODE) {
-            System.out.println("KALAZAM");
             switch(resultCode) {
                 case Activity.RESULT_OK:
                     Bundle bundle = data.getExtras();
 
                     Bitmap bmp = (Bitmap) bundle.get("data");
                     imageImageView.setImageBitmap(bmp);
-                    System.out.println("ADASKLDJASKLDJKLASDKLASJKLDASJKLASDKLASJDKLASJDKLASDKLJKLDSAJDKLASDJKLASJKLDAJDKLASJKLDJASKLDJASKLJDKLASJDKLASJDKLASJKLDASJKLDASJKLDASJKLDASJKLDJ    " + bmp);
                     break;
                 case Activity.RESULT_CANCELED:
-                    System.out.println("ERROasdadasldasjdkljdkl");
                     break;
             }
         }

@@ -44,6 +44,7 @@ public class ContentActivity extends AppCompatActivity
     private int selectedItem;
 
     private ListView resultListView;
+    private NavigationView nView;
 
     private static final int REQUEST_LOCATION = 199;
 
@@ -62,9 +63,9 @@ public class ContentActivity extends AppCompatActivity
         drawer.setDrawerListener(toggle);
         toggle.syncState();
 
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
-        onNavigationItemSelected(navigationView.getMenu().getItem(0).setChecked(true));
-        navigationView.setNavigationItemSelectedListener(this);
+        nView = (NavigationView) findViewById(R.id.nav_view);
+        onNavigationItemSelected(nView.getMenu().getItem(0));
+        nView.setNavigationItemSelectedListener(this);
         // ATTENTION: This was auto-generated to implement the App Indexing API.
         // See https://g.co/AppIndexing/AndroidStudio for more information.
         client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).addApi(LocationServices.API).addConnectionCallbacks(this).build();
@@ -76,8 +77,12 @@ public class ContentActivity extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
+        } else if (selectedItem == R.id.nav_settings) {
+            onNavigationItemSelected(nView.getMenu().getItem(0));
         } else {
-            super.onBackPressed();
+            SessionStorage sessionStorage = new SessionStorage(this);
+            sessionStorage.logoutUser();
+            finish();
         }
     }
 
@@ -150,6 +155,7 @@ public class ContentActivity extends AppCompatActivity
             fTransaction.replace(R.id.container, fragment);
             fTransaction.commit();
             selectedItem = id;
+            nView.getMenu().getItem(0).setChecked(true);
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

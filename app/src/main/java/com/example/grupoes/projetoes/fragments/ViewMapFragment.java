@@ -133,6 +133,7 @@ public class ViewMapFragment extends Fragment implements OnMapReadyCallback {
                 Intent i = new Intent(getContext(), PointOfSaleActivity.class);
                 i.putExtra("POINT_NAME", marker.getTitle());
                 startActivity(i);
+                getActivity().finish();
             }
 
         });

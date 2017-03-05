@@ -112,4 +112,10 @@ public class PointOfSaleActivity extends AppCompatActivity {
         }
     }
 
+    @Override
+    public void onBackPressed() {
+        Intent i = new Intent(PointOfSaleActivity.this, ContentActivity.class);
+        startActivity(i);
+        finish();
+    }
 }
