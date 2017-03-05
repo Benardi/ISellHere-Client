@@ -19,7 +19,6 @@ import java.util.List;
 
 public class EditPointOfSaleActivity extends AppCompatActivity {
     private EditText pSNameEditText;
-    private EditText pSEvaluationEditText;
     private EditText pSDescriptionEditText;
 
     private Button save;
@@ -38,7 +37,6 @@ public class EditPointOfSaleActivity extends AppCompatActivity {
         //getSupportActionBar().setTitle("Edit Point of Sale");
 
         pSNameEditText = (EditText) findViewById(R.id.editNamePSText);
-        pSEvaluationEditText = (EditText) findViewById(R.id.editEvaluationPSText);
         pSDescriptionEditText = (EditText) findViewById(R.id.editDescripptionPSText);
         save = (Button) findViewById(R.id.saveButtonEditPS);
         pSImage = (Button) findViewById(R.id.editPSImageButton);
