@@ -5,102 +5,95 @@
     android:id="@+id/activity_edit_point_of_sale"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.example.grupoes.projetoes.activities.EditPointOfSaleActivity">
-
     <Button
-        android:text="@string/saveButtonText"
-        android:layout_width="80sp"
-        android:layout_height="50sp"
-        android:layout_marginEnd="13dp"
-        android:layout_marginTop="21dp"
-        android:id="@+id/saveButtonEditPS"
-        style="@style/formButton"
-        android:layout_below="@+id/edit_pos_image_view"
-        android:layout_alignParentEnd="true" />
+        android:layout_height="30sp"
+        android:layout_width="30sp"
+        android:layout_marginTop="5sp"
+        android:layout_marginLeft="5sp"
+        android:background="@drawable/ic_close_dark"
+        android:id="@+id/close_edit_pointofsale"
+        android:backgroundTint="#C6C6C6"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Edit Point of Sale"
+        android:textSize="20sp"
+        android:gravity="center_horizontal"
+        android:id="@+id/head_edit_pointofsale"
+        android:layout_alignBottom="@+id/close_edit_pointofsale"
+        android:layout_centerHorizontal="true" />
+
+    <View style="@style/Divider"/>
+
+    <ImageView
+        android:layout_width="250sp"
+        android:layout_height="170sp"
+        android:id="@+id/edit_pos_image_view"
+        android:background="@android:drawable/ic_menu_camera"
+        android:layout_below="@+id/head_edit_pointofsale"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="30sp"
+        android:scaleType="centerCrop"/>
 
     <EditText
-        android:layout_width="128sp"
+        android:layout_width="250sp"
         android:inputType="textPersonName"
         android:ems="10"
         android:id="@+id/editNamePSText"
-        android:layout_alignBottom="@+id/editPSNameTextView"
-        android:layout_toEndOf="@+id/editPSNameTextView"
-        android:layout_marginStart="25sp"
-        android:textSize="12sp"
-        android:layout_height="33sp" />
+        android:textSize="15sp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/pos_name"
+        android:layout_centerHorizontal="true" />
 
     <TextView
-        android:text="@string/descriptionPSTextView"
+        android:text="@string/editPSImageButton"
         android:layout_width="wrap_content"
+        android:id="@+id/editPSImageButton"
+        android:textColor="@color/colorAccent"
+        android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
         android:layout_height="wrap_content"
-        android:id="@+id/descriptionPSTextView"
-        android:layout_centerVertical="true"
-        android:layout_alignParentStart="true"
-        android:layout_margin="15sp"
-        style="@style/InputInfoText"/>
+        android:layout_below="@+id/edit_pos_image_view"
+        android:layout_centerHorizontal="true" />
 
     <Button
-        android:text="@string/editPSImageButton"
-        android:layout_width="90sp"
-        android:id="@+id/editPSImageButton"
-        style="@style/formButton"
+        android:layout_width="60sp"
+        android:padding="5dp"
         android:layout_height="60sp"
-        android:layout_alignTop="@+id/edit_pos_image_view"
-        android:layout_alignEnd="@+id/saveButtonEditPS"
-        android:layout_marginTop="31dp" />
+        android:id="@+id/saveButtonEditPS"
+        android:background="@mipmap/ic_done_round"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="23dp" />
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Name"
+        android:id="@+id/pos_name"
+        android:textSize="15sp"
+        android:layout_centerVertical="true"
+        android:layout_alignStart="@+id/editNamePSText" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Description"
+        android:id="@+id/pos_description"
+        android:textSize="15sp"
+        android:layout_marginTop="10sp"
+        android:layout_below="@+id/editNamePSText"
+        android:layout_alignStart="@+id/editNamePSText" />
 
     <EditText
-        android:layout_width="128sp"
-        android:layout_height="33sp"
-        android:inputType="textPersonName"
-        android:ems="10"
-        android:id="@+id/editEvaluationPSText"
-        android:layout_above="@+id/descriptionPSTextView"
-        android:layout_toEndOf="@+id/descriptionPSTextView"
-        android:textSize="12sp"/>
-
-    <EditText
-        android:layout_width="128sp"
-        android:layout_height="33sp"
+        android:layout_width="250sp"
+        android:layout_height="wrap_content"
         android:inputType="textPersonName"
         android:ems="10"
         android:id="@+id/editDescripptionPSText"
-        android:textSize="12sp"
-        android:layout_alignBaseline="@+id/descriptionPSTextView"
-        android:layout_alignBottom="@+id/descriptionPSTextView"
-        android:layout_toStartOf="@+id/editPSImageButton" />
-
-    <TextView
-        android:text="@string/editEvaluationPSTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/editEvaluationPSTextView"
-        style="@style/InputInfoText"
-        android:layout_alignBottom="@+id/saveButtonEditPS"
-        android:layout_alignStart="@+id/descriptionPSTextView" />
-
-    <TextView
-        android:text="@string/editPSNameTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/editPSNameTextView"
-        style="@style/InputInfoText"
-        android:layout_alignTop="@+id/saveButtonEditPS"
-        android:layout_alignStart="@+id/editEvaluationPSTextView" />
-
-    <ImageView
-        android:layout_width="168sp"
-        android:layout_height="128sp"
-        app:srcCompat="@drawable/cast_abc_scrubber_control_off_mtrl_alpha"
-        android:id="@+id/edit_pos_image_view"
-        android:layout_marginLeft="15sp"
-        android:background="@android:drawable/ic_menu_camera"
-        android:adjustViewBounds="false"
-        android:layout_alignParentTop="true"
-        android:layout_alignStart="@+id/editPSNameTextView" />
-
+        android:textSize="15sp"
+        android:layout_below="@+id/pos_description"
+        android:layout_alignStart="@+id/pos_description" />
 </RelativeLayout>

@@ -8,94 +8,126 @@
 
     tools:context="com.example.grupoes.projetoes.activities.EditProductActivity">
 
-    <include
-        layout="@layout/toolbar_init"
-        android:id="@+id/include3"/>
-
-    <ImageView
-        android:layout_width="168sp"
-        android:layout_height="128sp"
-        app:srcCompat="@drawable/cast_abc_scrubber_control_off_mtrl_alpha"
-        android:layout_below="@+id/include3"
-        android:id="@+id/editImageProductView"
-        android:layout_marginBottom="15sp"
-        android:layout_marginStart="13sp"
-        android:layout_marginTop="15sp"
-        android:src="@android:drawable/ic_menu_camera" />
-
     <Button
-        android:text="@string/editProductImagemButton"
-        android:layout_width="80sp"
-        android:layout_alignTop="@+id/editImageProductView"
-        android:layout_alignParentEnd="true"
-        android:layout_marginEnd="27dp"
-        android:layout_marginTop="32dp"
-        android:id="@+id/editProductImagemButton"
-        style="@style/formButton"
-        android:layout_height="60sp" />
+        android:layout_height="30sp"
+        android:layout_width="30sp"
+        android:layout_marginTop="5sp"
+        android:layout_marginLeft="5sp"
+        android:background="@drawable/ic_close_dark"
+        android:id="@+id/close_edit_product"
+        android:backgroundTint="#C6C6C6"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Edit Product"
+        android:textSize="20sp"
+        android:gravity="center_horizontal"
+        android:id="@+id/head_edit_product"
+        android:layout_alignBottom="@+id/close_edit_product"
+        android:layout_centerHorizontal="true"
+        />
+
+    <View style="@style/Divider"/>
 
     <TextView
         android:text="@string/editProductNameTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="78dp"
+        android:layout_marginTop="15sp"
+        android:textSize="15sp"
         android:id="@+id/editProductNameTextView"
-        android:layout_below="@+id/editImageProductView"
+        android:layout_below="@+id/editProductImagemButton"
         android:layout_alignStart="@+id/editImageProductView" />
 
-    <TextView
-        android:text="@string/editPriceProductTextView"
-        android:layout_width="wrap_content"
+
+    <ImageView
+        android:layout_width="250sp"
+        android:layout_height="170sp"
+        android:id="@+id/editImageProductView"
+        android:layout_below="@+id/head_edit_product"
+        android:layout_centerHorizontal="true"
+        android:background="@android:drawable/ic_menu_camera"
+        android:layout_marginTop="30sp"
+        android:scaleType="centerCrop"/>
+
+    <EditText
+        android:layout_width="250sp"
         android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:ems="10"
+        android:textSize="15sp"
+        android:id="@+id/editNameProductText"
         android:layout_below="@+id/editProductNameTextView"
-        android:layout_alignStart="@+id/editProductNameTextView"
-        android:layout_marginTop="29dp"
-        android:id="@+id/editPriceProductTextView" />
+        android:layout_alignStart="@+id/editProductNameTextView" />
+
+    <TextView
+        android:text="@string/editProductImagemButton"
+        android:layout_width="wrap_content"
+        android:id="@+id/editProductImagemButton"
+        android:layout_height="36sp"
+        android:textColor="@color/colorAccent"
+        android:layout_below="@+id/editImageProductView"
+        android:layout_centerHorizontal="true" />
+
+
+    <Button
+        android:layout_width="60sp"
+        android:padding="5dp"
+        android:layout_height="60sp"
+        android:id="@+id/saveButtonEditProduct"
+        android:background="@mipmap/ic_done_round"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="23dp" />
 
     <TextView
         android:text="@string/editDescriptionProductTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="18dp"
+        android:textSize="15sp"
         android:id="@+id/editDescriptionProductTextView"
-        android:layout_below="@+id/editPriceProductTextView"
-        android:layout_alignStart="@+id/editPriceProductTextView" />
-
-    <Button
-        android:text="@string/saveButtonEditProduct"
-        android:layout_width="80sp"
-        android:layout_height="50sp"
-        android:layout_above="@+id/editNameProductText"
-        android:layout_alignEnd="@+id/editProductImagemButton"
-        android:id="@+id/saveButtonEditProduct"
-        style="@style/formButton"/>
-
-    <EditText
-        android:layout_width="128sp"
-        android:layout_height="wrap_content"
-        android:inputType="textPersonName"
-        android:ems="10"
-        android:id="@+id/editPriceProductText"
-        android:layout_alignBaseline="@+id/editPriceProductTextView"
-        android:layout_alignBottom="@+id/editPriceProductTextView"
+        android:layout_below="@+id/editNameProductText"
         android:layout_alignStart="@+id/editNameProductText" />
 
-    <EditText
-        android:layout_width="128sp"
+    <TextView
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:inputType="textPersonName"
-        android:ems="10"
-        android:id="@+id/editNameProductText"
-        android:layout_above="@+id/editPriceProductText"
-        android:layout_toEndOf="@+id/editProductNameTextView" />
+        android:text="R$"
+        android:textSize="15sp"
+        android:id="@+id/textView8"
+        android:layout_below="@+id/editPriceProductTextView"
+        android:layout_alignStart="@+id/editPriceProductTextView"
+        android:layout_marginTop="15dp" />
 
     <EditText
-        android:layout_width="300sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:ems="5"
+        android:textSize="15sp"
+        android:id="@+id/editPriceProductText"
+        android:layout_alignBaseline="@+id/textView8"
+        android:layout_alignBottom="@+id/textView8"
+        android:layout_toEndOf="@+id/textView8" />
+
+    <EditText
+        android:layout_width="250sp"
         android:layout_height="wrap_content"
         android:inputType="textPersonName"
         android:ems="10"
+        android:textSize="15sp"
         android:id="@+id/editDescriptionProductText"
         android:layout_below="@+id/editDescriptionProductTextView"
-        android:layout_alignStart="@+id/editDescriptionProductTextView"
-        android:layout_marginTop="11dp" />
+        android:layout_alignStart="@+id/editDescriptionProductTextView" />
+
+    <TextView
+        android:text="@string/editPriceProductTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="15sp"
+        android:id="@+id/editPriceProductTextView"
+        android:layout_below="@+id/editDescriptionProductText"
+        android:layout_alignStart="@+id/editDescriptionProductText" />
+
 </RelativeLayout>

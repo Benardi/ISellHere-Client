@@ -40,7 +40,7 @@
     <string name="editPSNameTextView">Name:</string>
     <string name="editEvaluationPSTextView">Evaluation:</string>
     <string name="descriptionPSTextView">Description: </string>
-    <string name="editPSImageButton">Send a Image</string>
+    <string name="editPSImageButton"><u>Send a Image</u></string>
 
     <!-- Evaluations -->
 
@@ -72,7 +72,7 @@
 
     <!-- Edit Product -->
 
-    <string name="editProductImagemButton">Send Image</string>
+    <string name="editProductImagemButton"><u>Send a Image</u></string>
     <string name="editProductNameTextView">Name:</string>
     <string name="editPriceProductTextView">Price:</string>
     <string name="editDescriptionProductTextView">Description:</string>

@@ -1,7 +1,10 @@
 package com.example.grupoes.projetoes.activities;
 
 import android.Manifest;
+import android.app.ActivityManager;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
@@ -27,6 +30,8 @@ import com.example.grupoes.projetoes.request_handlers.UserManagementHandler;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.List;
+
 public class LoginActivity extends AppCompatActivity {
     private static final int REQUEST_LOCATION = 199;
     private SessionStorage sessionStorage;
@@ -40,8 +45,11 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-
         sessionStorage = new SessionStorage(this);
+
+        if(sessionStorage.isUserLoggedIn()){
+            skipLogin();
+        }
 
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, 2);
@@ -55,6 +63,24 @@ public class LoginActivity extends AppCompatActivity {
         configureToolbar();
         captureComponents();
         configureComponents();
+    }
+
+    private void skipLogin() {
+        if (!isActivityRunning(ContentActivity.class)) {
+            startActivity(new Intent(this, ContentActivity.class));
+        }
+        finish();
+    }
+
+    private boolean isActivityRunning(Class activityClass) {
+        ActivityManager activityManager = (ActivityManager) getBaseContext().getSystemService(Context.ACTIVITY_SERVICE);
+        List<ActivityManager.RunningTaskInfo> tasks = activityManager.getRunningTasks(Integer.MAX_VALUE);
+        for (ActivityManager.RunningTaskInfo task : tasks) {
+            if (activityClass.getCanonicalName().equalsIgnoreCase(task.baseActivity.getClassName())) {
+                return true;
+            }
+        }
+        return false;
     }
 
     @Override

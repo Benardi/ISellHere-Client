@@ -81,44 +81,49 @@ public class AddProductActivity extends AppCompatActivity {
             createPoduct.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    SessionStorage storage = new SessionStorage(getApplicationContext());
+                    if(productName.getText().toString().equals("") || productDescription.getText().toString().equals("") || productPrice.getText().toString().equals("")){
+                        Toast.makeText(getApplicationContext(), "Field cannot be empty!", Toast.LENGTH_LONG).show();
+                    }else{
 
-                    final String creatorName = storage.getLoggedUser().getUsername();
-                    final String nameProduct = productName.getText().toString();
-                    final String descriptionProduct = productDescription.getText().toString();
-                    final String imageProduct = UtilOperations.bitMapToString(((BitmapDrawable)productImage.getDrawable()).getBitmap());
-                    final double priceProduct = Double.parseDouble(String.valueOf(productPrice.getText().toString()));
+                        SessionStorage storage = new SessionStorage(getApplicationContext());
 
-                    final AddProductBean productBean = new AddProductBean(creatorName, pointOfSale, nameProduct, descriptionProduct, String.valueOf(priceProduct), imageProduct);
+                        final String creatorName = storage.getLoggedUser().getUsername();
+                        final String nameProduct = productName.getText().toString();
+                        final String descriptionProduct = productDescription.getText().toString();
+                        final String imageProduct = UtilOperations.bitMapToString(((BitmapDrawable)productImage.getDrawable()).getBitmap());
+                        final double priceProduct = Double.parseDouble(String.valueOf(productPrice.getText().toString()));
 
-                    ProductHandler.getInstance().requestAddProduct(productBean,
-                            new SessionStorage(getApplicationContext()).getToken(),
-                            new Response.Listener<JSONObject>() {
-                                @Override
-                                public void onResponse(JSONObject response) {
-                                    ProductController.getInstance().getProductsList().add(new Product(creatorName, pointOfSale, nameProduct, descriptionProduct, priceProduct, imageProduct));
-                                    Toast.makeText(getApplicationContext(), "You have successfully created a product.", Toast.LENGTH_LONG).show();
-                                    Intent i = new Intent(getApplicationContext(), ProductActivity.class);
-                                    i.putExtra("PRODUCT_NAME", productBean.getProductName());
-                                    startActivity(i);
+                        final AddProductBean productBean = new AddProductBean(creatorName, pointOfSale, nameProduct, descriptionProduct, String.valueOf(priceProduct), imageProduct);
 
-                                }
-                            },
-                            new Response.ErrorListener(){
-                                @Override
-                                public void onErrorResponse(VolleyError error) {
-                                    error.printStackTrace();
-                                    Log.d("ISELLHERE", ""+error.networkResponse);
-                                    if(error.networkResponse != null && error.networkResponse.data != null){
-                                        VolleyError newError = new VolleyError(new String(error.networkResponse.data));
-                                        Log.d("ERROR_MESSAGE", ""+newError);
+                        ProductHandler.getInstance().requestAddProduct(productBean,
+                                new SessionStorage(getApplicationContext()).getToken(),
+                                new Response.Listener<JSONObject>() {
+                                    @Override
+                                    public void onResponse(JSONObject response) {
+                                        ProductController.getInstance().getProductsList().add(new Product(creatorName, pointOfSale, nameProduct, descriptionProduct, priceProduct, imageProduct));
+                                        Toast.makeText(getApplicationContext(), "You have successfully created a product.", Toast.LENGTH_LONG).show();
+                                        Intent i = new Intent(getApplicationContext(), ProductActivity.class);
+                                        i.putExtra("PRODUCT_NAME", productBean.getProductName());
+                                        startActivity(i);
+
+                                    }
+                                },
+                                new Response.ErrorListener(){
+                                    @Override
+                                    public void onErrorResponse(VolleyError error) {
+                                        error.printStackTrace();
+                                        Log.d("ISELLHERE", ""+error.networkResponse);
+                                        if(error.networkResponse != null && error.networkResponse.data != null){
+                                            VolleyError newError = new VolleyError(new String(error.networkResponse.data));
+                                            Log.d("ERROR_MESSAGE", ""+newError);
+                                        }
                                     }
                                 }
-                            }
-                    );
-
+                        );
+                    }
                 }
             });
+
         }
 
         @Override

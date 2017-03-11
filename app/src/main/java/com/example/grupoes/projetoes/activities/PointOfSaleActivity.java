@@ -1,6 +1,8 @@
 package com.example.grupoes.projetoes.activities;
 
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -77,18 +79,30 @@ public class PointOfSaleActivity extends AppCompatActivity {
             descriptionTextView.setText(pointOfSale.getComment());
             imageView.setImageBitmap(pointOfSale.getImage());
             deleteButton.setOnClickListener(new View.OnClickListener() {
-
                 @Override
                 public void onClick(View view) {
-                    PointsController.getInstance().deletePoint(pointOfSale.getName(), PointOfSaleActivity.this, new PointsOperationCallback() {
-                        @Override
-                        public void done(List<PointOfSale> pointsOfSale) {
-                            Intent i = new Intent(PointOfSaleActivity.this, ContentActivity.class);
-                            startActivity(i);
+                    AlertDialog.Builder builder = new AlertDialog.Builder(PointOfSaleActivity.this);
+                    builder.setMessage("Delete " + pointOfSale.getName() + "?");
+                    builder.setPositiveButton("DELETE", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface arg0, int arg1) {
+                            PointsController.getInstance().deletePoint(pointOfSale.getName(), PointOfSaleActivity.this, new PointsOperationCallback() {
+                                @Override
+                                public void done(List<PointOfSale> pointsOfSale) {
+                                    Intent i = new Intent(PointOfSaleActivity.this, ContentActivity.class);
+                                    startActivity(i);
+                                }
+                            });
                         }
                     });
-                }
 
+                    builder.setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            finish();
+                        }
+                    });
+                    AlertDialog alertDialog = builder.create();
+                    alertDialog.show();
+                }
             });
 
             editButton.setOnClickListener(new View.OnClickListener() {
@@ -103,8 +117,7 @@ public class PointOfSaleActivity extends AppCompatActivity {
             addProduct.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent i = new Intent(PointOfSaleActivity.this,
-                            AddProductActivity.class);
+                    Intent i = new Intent(PointOfSaleActivity.this, AddProductActivity.class);
                     i.putExtra("POINT_NAME", pointOfSale.getName());
                     startActivity(i);
                 }

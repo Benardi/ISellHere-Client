@@ -13,6 +13,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.example.grupoes.projetoes.R;
 import com.example.grupoes.projetoes.controllers.PointsController;
@@ -28,9 +29,10 @@ public class EditPointOfSaleActivity extends AppCompatActivity {
     private EditText pSDescriptionEditText;
 
     private Button save;
-    private Button pSImage;
+    private TextView pSImage;
 
     private ImageView imageView;
+    private Button close;
 
     private PointOfSale pointOfSale;
 
@@ -42,10 +44,11 @@ public class EditPointOfSaleActivity extends AppCompatActivity {
         pointOfSale = PointsController.getInstance().findPointOfSaleByName(getIntent().getExtras().getString("POINT_NAME"));
         //getSupportActionBar().setTitle("Edit Point of Sale");
 
+        close = (Button) findViewById(R.id.close_edit_pointofsale);
         pSNameEditText = (EditText) findViewById(R.id.editNamePSText);
         pSDescriptionEditText = (EditText) findViewById(R.id.editDescripptionPSText);
         save = (Button) findViewById(R.id.saveButtonEditPS);
-        pSImage = (Button) findViewById(R.id.editPSImageButton);
+        pSImage = (TextView) findViewById(R.id.editPSImageButton);
 
         pSNameEditText.setText(pointOfSale.getName());
         pSDescriptionEditText.setText(pointOfSale.getComment());
@@ -79,6 +82,13 @@ public class EditPointOfSaleActivity extends AppCompatActivity {
                         Intent.ACTION_PICK,
                         android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
                 startActivityForResult(i, RESULT_LOAD_IMAGE);
+            }
+        });
+
+        close.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
             }
         });
     }

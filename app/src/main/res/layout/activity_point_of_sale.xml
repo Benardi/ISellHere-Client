@@ -31,31 +31,33 @@
                 android:layout_alignParentTop="true"
                 android:layout_alignParentEnd="true" />
 
-            <Button
-                android:text="@string/editPSButton"
-                android:id="@+id/pos_edit_button"
-                android:layout_height="50sp"
-                style="@style/formButton"
-                android:layout_alignParentTop="true"
-                android:layout_alignParentStart="true"
-                android:layout_width="match_parent" />
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_gravity="right">
+                <Button
+                    android:id="@+id/pos_edit_button"
+                    android:layout_width="30sp"
+                    android:layout_margin="10sp"
+                    android:layout_height="30sp"
+                    android:background="@mipmap/ic_edit"/>
 
-            <Button
-                android:text="@string/deletePSButton"
-                android:layout_height="50sp"
-                android:id="@+id/post_delete_button"
-                android:layout_width="match_parent"
-                style="@style/formButton"
-                android:layout_alignParentBottom="true"
-                android:layout_alignParentStart="true" />
+                <Button
+                    android:background="@mipmap/ic_delete"
+                    android:layout_height="30sp"
+                    android:id="@+id/post_delete_button"
+                    android:layout_width="30sp"
+                    style="@style/formButton"
+                    android:layout_alignParentBottom="true"
+                    android:layout_margin="10sp"/>
 
-            <View style="@style/Divider"/>
+            </LinearLayout>
 
             <RelativeLayout
                 android:layout_width="fill_parent"
                 android:layout_height="?android:attr/listPreferredItemHeight"
                 android:padding="6dip"
-                android:layout_marginTop="39dp"
                 android:layout_alignParentTop="true"
                 android:layout_alignParentStart="true">
 
@@ -87,7 +89,6 @@
                 android:layout_width="fill_parent"
                 android:layout_height="?android:attr/listPreferredItemHeight"
                 android:padding="6dip"
-                android:layout_marginTop="39dp"
                 android:layout_alignParentTop="true"
                 android:layout_alignParentStart="true">
 
@@ -135,22 +136,33 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <FrameLayout
+                    android:layout_width="90sp"
+                    android:layout_marginTop="3.5sp"
+                    android:layout_height="120sp">
+                    <Button
+                        android:layout_height="90sp"
+                        android:layout_width="match_parent"
+                        android:background="@mipmap/ic_add"
+                        android:id="@+id/pos_add_product_button"/>
+                    <TextView
+                        android:layout_width="90sp"
+                        android:layout_height="30sp"
+                        android:text="Add Product"
+                        android:layout_gravity="bottom|center_horizontal"
+                        android:layout_marginStart="5sp"/>
+
+                </FrameLayout>
 
                 <android.support.v7.widget.RecyclerView
                 android:id="@+id/products_recyclerView"
                 android:layout_width="match_parent"
                 android:layout_height="120sp"
-                android:background="@color/white"
                 android:clipToPadding="false"/>
             </LinearLayout>
-
-            <Button
-                android:text="Add Product"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/pos_add_product_button"
-                style="@style/formButton" />
 
         </LinearLayout>
 

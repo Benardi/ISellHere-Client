@@ -32,7 +32,8 @@ public class EditProductActivity extends AppCompatActivity {
     EditText productName;
     EditText productDescription;
     EditText productPrice;
-    Button buttonGetImageProduct;
+    TextView buttonGetImageProduct;
+    Button close;
     Button save;
     private Product product;
 
@@ -47,10 +48,6 @@ public class EditProductActivity extends AppCompatActivity {
 
         configureComponents();
 
-        final Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_init);
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setTitle("Edit "+ product.getProductName());
 
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, 2);
@@ -81,6 +78,13 @@ public class EditProductActivity extends AppCompatActivity {
                 startActivity(intent1);
             }
         });
+
+        close.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
     }
 
     private void configureComponents() {
@@ -89,8 +93,9 @@ public class EditProductActivity extends AppCompatActivity {
             productImage = (ImageView) findViewById(R.id.editImageProductView);
             productDescription = (EditText) findViewById(R.id.editDescriptionProductText);
             productPrice = (EditText) findViewById(R.id.editPriceProductText);
-            buttonGetImageProduct = (Button) findViewById(R.id.editProductImagemButton);
+            buttonGetImageProduct = (TextView) findViewById(R.id.editProductImagemButton);
             save = (Button) findViewById(R.id.saveButtonEditProduct);
+            close = (Button) findViewById(R.id.close_edit_product);
 
             productName.setText(product.getProductName());
             productPrice.setText(String.valueOf(product.getProductPrice()));

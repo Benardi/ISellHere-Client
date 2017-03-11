@@ -26,11 +26,12 @@
                 android:scaleType="centerCrop"/>
 
             <Button
-                android:layout_width="match_parent"
+                android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:drawableTop="@drawable/ic_menu_gallery"
                 android:id="@+id/add_gallery_button"
                 android:layout_below="@+id/product_image"
+                android:layout_alignEnd="@+id/product_image"
                 android:backgroundTint="@android:color/transparent" />
             <TextView
                 android:text="Name:"
