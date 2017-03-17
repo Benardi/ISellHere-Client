@@ -74,8 +74,10 @@ public class ProductActivity extends AppCompatActivity {
                 builder.setPositiveButton("DELETE", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface arg0, int arg1) {
                         ProductController.getInstance().deleteProduct(productName, getApplicationContext());
+                        ProductController.getInstance().getProductsList().remove(product);
                         Intent intent = new Intent(ProductActivity.this, PointOfSaleActivity.class);
                         intent.putExtra("POINT_NAME", product.getPointOfSale());
+                        startActivity(intent);
                     }
                 });
 

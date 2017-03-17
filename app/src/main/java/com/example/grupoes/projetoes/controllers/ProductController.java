@@ -1,5 +1,6 @@
 package com.example.grupoes.projetoes.controllers;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.util.Log;
@@ -7,6 +8,7 @@ import android.widget.Toast;
 
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.example.grupoes.projetoes.activities.ProductActivity;
 import com.example.grupoes.projetoes.beans.DeletePointOfSaleBean;
 import com.example.grupoes.projetoes.beans.DeleteProductBean;
 import com.example.grupoes.projetoes.beans.EditPointOfSaleBean;
@@ -32,6 +34,7 @@ import java.util.List;
 
 public class ProductController {
     private static ProductController instance;
+    private ProgressDialog progressDialog;
 
     private List<Product> products;
 
@@ -120,7 +123,10 @@ public class ProductController {
 
                 });
     }
-    public void getProducts(final Context context, String pointOfSale) {
+    public void getProducts(final Context context, String pointOfSale, final ProgressDialog progressDialog) {
+        progressDialog.setMessage("Loading informations...");
+        progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        progressDialog.show();
         products = new ArrayList<>();
         ProductHandler.getInstance().requestGetProducts(pointOfSale, new SessionStorage(context).getToken(),
                 new Response.Listener<JSONArray>() {
@@ -137,20 +143,25 @@ public class ProductController {
                                 String productImage = object.getString("image");
                                 Product p = new Product(creator, pointOfSale, productName, productComment, productPrice, productImage);
                                 products.add(p);
+
                             }
+                            if(progressDialog.isShowing())
+                                progressDialog.dismiss();
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
-                        Toast.makeText(context, "Finish getProducts", Toast.LENGTH_LONG).show();
                     }
                 },
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
+                        if(progressDialog.isShowing())
+                            progressDialog.dismiss();
                         error.printStackTrace();
                         if(error.networkResponse != null && error.networkResponse.data != null){
                             VolleyError newError = new VolleyError(new String(error.networkResponse.data));
                             Log.d("ERROR_MESSAGE", ""+newError);
+
                         }
                     }
                 });

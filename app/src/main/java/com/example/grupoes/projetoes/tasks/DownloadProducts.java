@@ -18,13 +18,17 @@ public class DownloadProducts extends AsyncTask<String, String, String> {
     public DownloadProducts(Context context){
         this.context = context;
         this.progressDialog = new ProgressDialog(context);
+
     }
+
+
     @Override
     protected String doInBackground(String... pointofsale) {
         String result = null;
         try {
-            ProductController.getInstance().getProducts(context, pointofsale[0]);
-            Thread.sleep(2000);
+            while (progressDialog.getProgress() <= progressDialog.getMax()) {
+                progressDialog.incrementProgressBy(5);
+            }
 
         }catch (Exception e){
             e.printStackTrace();
@@ -36,11 +40,6 @@ public class DownloadProducts extends AsyncTask<String, String, String> {
         return result;
     }
 
-    @Override
-    protected void onPreExecute() {
-        progressDialog.setMessage("Carregando");
-        progressDialog.show();
-    }
 
     @Override
     protected void onPostExecute(String params) {

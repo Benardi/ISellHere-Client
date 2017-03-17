@@ -1,6 +1,7 @@
 package com.example.grupoes.projetoes.fragments;
 
 import android.Manifest;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -54,6 +55,7 @@ import java.util.List;
 public class ViewMapFragment extends Fragment implements OnMapReadyCallback {
     private GoogleMap map;
     private View parentView;
+    private ProgressDialog progressDialog;
 
     private FloatingActionButton newPointOfSaleButton;
 
@@ -120,7 +122,7 @@ public class ViewMapFragment extends Fragment implements OnMapReadyCallback {
 
             @Override
             public boolean onMarkerClick(Marker marker) {
-                ProductController.getInstance().getProducts(getActivity().getApplicationContext(), marker.getTitle());
+                ProductController.getInstance().getProducts(getContext(), marker.getTitle(), progressDialog);
                 return false;
             }
 
@@ -130,10 +132,11 @@ public class ViewMapFragment extends Fragment implements OnMapReadyCallback {
 
             @Override
             public void onInfoWindowClick(Marker marker) {
-                Intent i = new Intent(getContext(), PointOfSaleActivity.class);
-                i.putExtra("POINT_NAME", marker.getTitle());
-                startActivity(i);
-                getActivity().finish();
+                    Intent i = new Intent(getContext(), PointOfSaleActivity.class);
+                    i.putExtra("POINT_NAME", marker.getTitle());
+                    startActivity(i);
+                    getActivity().finish();
+
             }
 
         });
@@ -141,6 +144,8 @@ public class ViewMapFragment extends Fragment implements OnMapReadyCallback {
 
     private void captureComponents() {
         newPointOfSaleButton = (FloatingActionButton) parentView.findViewById(R.id.view_map_new_point_of_sale_floating_button);
+        progressDialog = new ProgressDialog(ViewMapFragment.this.getActivity());
+        progressDialog.setCancelable(true);
     }
 
     private void configureComponents() {
