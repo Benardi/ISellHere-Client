@@ -5,7 +5,7 @@
     android:id="@+id/activity_select_point"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.grupoes.projetoes.activities.NewPointOfSaleActivity">
+    tools:context="com.example.grupoes.projetoes.presentation.ui.activities.NewPointOfSaleActivity">
 
     <include
         layout="@layout/toolbar_init" />

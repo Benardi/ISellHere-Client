@@ -14,6 +14,8 @@ import com.example.grupoes.projetoes.beans.DeletePointOfSaleBean;
 import com.example.grupoes.projetoes.beans.DeleteProductBean;
 import com.example.grupoes.projetoes.beans.EditPointOfSaleBean;
 import com.example.grupoes.projetoes.beans.EditProductBean;
+import com.example.grupoes.projetoes.beans.GetProductsInPointBean;
+import com.example.grupoes.projetoes.util.CustomJsonArrayRequest;
 import com.example.grupoes.projetoes.util.RequestActions;
 import com.google.gson.Gson;
 
@@ -130,22 +132,26 @@ public class ProductHandler {
     }
 
     public void requestGetProducts(String pointOfSale, final String token, Response.Listener<JSONArray> okResponse, Response.ErrorListener errorResponse) {
-        JsonArrayRequest request = new JsonArrayRequest(RequestActions.GET_PRODUCTS.getRequestMethod(),
-                RequestActions.GET_PRODUCTS.getUrl() + "/" + pointOfSale,
-                null,
-                okResponse,
-                errorResponse)
-        {
-            @Override
-            public Map<String, String> getHeaders ()throws AuthFailureError {
-                Map<String, String> headers = new HashMap<>();
-                String auth = "Bearer " + token;
-                headers.put("Content-Type", "application/json");
-                headers.put("Authorization", auth);
-                return headers;
-            }
-        };
+        GetProductsInPointBean body = new GetProductsInPointBean(pointOfSale);
+        try {
+            CustomJsonArrayRequest request = new CustomJsonArrayRequest(RequestActions.GET_PRODUCTS.getRequestMethod(),
+                    RequestActions.GET_PRODUCTS.getUrl(),
+                    new JSONObject(gsonBuilder.toJson(body)),
+                    okResponse,
+                    errorResponse) {
+                @Override
+                public Map<String, String> getHeaders() throws AuthFailureError {
+                    Map<String, String> headers = new HashMap<>();
+                    String auth = "Bearer " + token;
+                    headers.put("Content-Type", "application/json");
+                    headers.put("Authorization", auth);
+                    return headers;
+                }
+            };
 
-        ISellHereApplication.getInstance().addToRequestQueue(request);
+            ISellHereApplication.getInstance().addToRequestQueue(request);
+        } catch(JSONException e) {
+            e.printStackTrace();
+        }
     }
 }

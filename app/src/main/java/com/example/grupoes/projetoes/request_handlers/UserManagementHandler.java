@@ -1,6 +1,7 @@
 package com.example.grupoes.projetoes.request_handlers;
 
 import com.android.volley.AuthFailureError;
+import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Response;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.example.grupoes.projetoes.ISellHereApplication;
@@ -21,6 +22,7 @@ import java.util.Map;
  * Created by Wesley on 22/02/2017.
  */
 public class UserManagementHandler {
+    private static final int MY_SOCKET_TIMEOUT_MS = 50000;
     private static UserManagementHandler instance;
 
     private Gson gsonBuilder;
@@ -44,6 +46,13 @@ public class UserManagementHandler {
                                                               new JSONObject(gsonBuilder.toJson(bodyData)),
                                                               okResponse,
                                                               errorResponse);
+
+            request.setRetryPolicy(new DefaultRetryPolicy(
+                    MY_SOCKET_TIMEOUT_MS,
+                    DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                    DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+
+
             ISellHereApplication.getInstance().addToRequestQueue(request);
         } catch(JSONException e) {
             e.printStackTrace();

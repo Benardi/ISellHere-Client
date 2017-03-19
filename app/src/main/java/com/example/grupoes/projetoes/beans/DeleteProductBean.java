@@ -6,8 +6,8 @@ package com.example.grupoes.projetoes.beans;
 
 public class
 DeleteProductBean {
-    String requester;
-    String productName;
+    private String requester;
+    private String productName;
 
     public DeleteProductBean(){}
 

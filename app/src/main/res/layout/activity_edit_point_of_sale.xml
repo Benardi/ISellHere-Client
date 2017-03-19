@@ -5,7 +5,7 @@
     android:id="@+id/activity_edit_point_of_sale"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.grupoes.projetoes.activities.EditPointOfSaleActivity">
+    tools:context="com.example.grupoes.projetoes.presentation.ui.activities.EditPointOfSaleActivity">
     <Button
         android:layout_height="30sp"
         android:layout_width="30sp"

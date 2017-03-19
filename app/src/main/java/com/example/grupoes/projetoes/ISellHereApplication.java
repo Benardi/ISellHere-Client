@@ -2,6 +2,7 @@ package com.example.grupoes.projetoes;
 
 import android.app.Application;
 import android.text.TextUtils;
+import android.util.Log;
 
 import com.android.volley.Cache;
 import com.android.volley.Network;
@@ -11,6 +12,8 @@ import com.android.volley.toolbox.BasicNetwork;
 import com.android.volley.toolbox.DiskBasedCache;
 import com.android.volley.toolbox.HurlStack;
 import com.android.volley.toolbox.Volley;
+
+import timber.log.Timber;
 
 /**
  * Created by Wesley on 19/02/2017.
@@ -29,10 +32,12 @@ public class ISellHereApplication extends Application {
     public void onCreate() {
         super.onCreate();
 
+        Timber.plant(new Timber.DebugTree());
+
         instance = this;
     }
 
-    public static synchronized ISellHereApplication getInstance() {
+    public static ISellHereApplication getInstance() {
         if (instance == null) {
             instance = new ISellHereApplication();
         }
@@ -42,7 +47,7 @@ public class ISellHereApplication extends Application {
 
     public RequestQueue getRequestQueue() {
         if (requestQueue == null) {
-            requestQueue = Volley.newRequestQueue(getApplicationContext());
+            requestQueue = Volley.newRequestQueue(ISellHereApplication.this);
         }
         return requestQueue;
     }

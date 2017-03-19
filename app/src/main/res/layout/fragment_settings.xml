@@ -2,7 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.grupoes.projetoes.fragments.SettingsFragment">
+    tools:context="com.example.grupoes.projetoes.presentation.ui.fragments.SettingsFragment">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -111,7 +111,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="26dip"
                         android:ellipsize="marquee"
-                        android:text="Password"
+                        android:text="Current Password"
                         android:textSize="12sp"
                         android:layout_below="@+id/textView12"
                         android:layout_alignParentStart="true"

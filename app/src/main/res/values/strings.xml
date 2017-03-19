@@ -1,6 +1,8 @@
 <resources>
     <string name="app_name">I Sell Here!</string>
 
+    <!-- Toolbar Titles -->
+    <string name="title_activity_registration">Create a New Account!</string>
     <string name="title_activity_maps">Map</string>
     <string name="title_activity_content">ContentActivity</string>
 
@@ -9,8 +11,12 @@
 
     <string name="title_activity_main2">Main2Activity</string>
 
+    <!-- Success Messages -->
+    <string name="registration_successful_msg">Congratulations! Your account is ready to be used!</string>
+    <string name="changepassword_successful_msg">Congratulations! You have changed your password!</string>
+
     <!-- Login -->
-    <string name="login_title">Login On I Sell Here!"</string>
+    <string name="title_activity_login">Login On I Sell Here!"</string>
     <string name="new_to_i_sell_here">New to I Sell Here!?</string>
     <string name="sign_up">Sign Up</string>
     <string name="login">Login</string>
@@ -40,7 +46,7 @@
     <string name="editPSNameTextView">Name:</string>
     <string name="editEvaluationPSTextView">Evaluation:</string>
     <string name="descriptionPSTextView">Description: </string>
-    <string name="editPSImageButton"><u>Send a Image</u></string>
+    <string name="editPSImageButton"><u>Send an Image</u></string>
 
     <!-- Evaluations -->
 
@@ -72,7 +78,7 @@
 
     <!-- Edit Product -->
 
-    <string name="editProductImagemButton"><u>Send a Image</u></string>
+    <string name="editProductImagemButton"><u>Send an Image</u></string>
     <string name="editProductNameTextView">Name:</string>
     <string name="editPriceProductTextView">Price:</string>
     <string name="editDescriptionProductTextView">Description:</string>

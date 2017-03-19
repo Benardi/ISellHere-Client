@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/selectionFragment"
-    tools:context="com.example.grupoes.projetoes.fragments.SelectionMapFragment">
+    tools:context="com.example.grupoes.projetoes.presentation.ui.fragments.SelectionMapFragment">
 
     <include
         layout="@layout/fragment_map" />

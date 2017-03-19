@@ -73,5 +73,25 @@ public class Product {
         this.productImage = productImage;
     }
 
+    @Override
+    public int hashCode() {
+        int result = pointOfSale != null ? pointOfSale.hashCode() : 0;
+        result = 31 * result + (productName != null ? productName.hashCode() : 0);
+        return result;
+    }
 
+    @Override
+    public boolean equals(Object obj) {
+        if (!(obj instanceof Product)) {
+            return false;
+        }
+
+        Product other = (Product) obj;
+
+        if (other.getProductName().equals(this.getProductName()) && other.getPointOfSale().equals(this.getPointOfSale())) {
+            return true;
+        }
+
+        return false;
+    }
 }

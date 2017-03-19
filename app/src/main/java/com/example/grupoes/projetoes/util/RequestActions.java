@@ -40,7 +40,7 @@ public enum RequestActions {
             Request.Method.POST),
     GET_PRODUCTS("get_products",
             FrontendConstants.GET_PRODUCTS_REQUEST_URL,
-            Request.Method.GET),
+            Request.Method.POST),
     SEARCH_PRODUCTS("search_products",
             FrontendConstants.SEARCH_PRODUCT_URL,
             Request.Method.POST),

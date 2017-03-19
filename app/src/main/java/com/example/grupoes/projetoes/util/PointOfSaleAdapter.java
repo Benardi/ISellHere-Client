@@ -6,16 +6,13 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
-import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 
 import com.example.grupoes.projetoes.R;
-import com.example.grupoes.projetoes.activities.PointOfSaleActivity;
+import com.example.grupoes.projetoes.presentation.ui.activities.PointOfSaleActivity;
 import com.example.grupoes.projetoes.models.PointOfSale;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**

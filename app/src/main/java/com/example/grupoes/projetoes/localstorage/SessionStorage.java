@@ -5,7 +5,8 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.location.Location;
 
-import com.example.grupoes.projetoes.activities.LoginActivity;
+import com.example.grupoes.projetoes.ISellHereApplication;
+import com.example.grupoes.projetoes.presentation.ui.activities.LoginActivity;
 import com.example.grupoes.projetoes.models.Session;
 import com.example.grupoes.projetoes.models.User;
 import com.google.android.gms.maps.model.LatLng;
@@ -21,8 +22,8 @@ public class SessionStorage {
     private Context context;
 
     public SessionStorage(Context context) {
-        this.preferences = context.getSharedPreferences(STORAGE_NAME, 0);
         this.context = context;
+        this.preferences = context.getSharedPreferences(STORAGE_NAME, 0);
     }
 
     public void createSession(Session session) {
@@ -67,19 +68,7 @@ public class SessionStorage {
         return preferences.getBoolean("isLogged", false);
     }
 
-    public boolean checkLogin() {
-        if (!isUserLoggedIn()) {
-            Intent i = new Intent(context, LoginActivity.class);
-            i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-            i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            context.startActivity(i);
-            return true;
-        }
-
-        return false;
-    }
-
-    public void logoutUser() {
+    public void logoutUser(Context activity) {
         SharedPreferences.Editor editor = preferences.edit();
         editor.clear();
         editor.commit();
@@ -87,6 +76,6 @@ public class SessionStorage {
         Intent i = new Intent(context, LoginActivity.class);
         i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        context.startActivity(i);
+        activity.startActivity(i);
     }
 }

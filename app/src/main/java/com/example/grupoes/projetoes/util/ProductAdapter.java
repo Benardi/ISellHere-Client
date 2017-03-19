@@ -3,10 +3,7 @@ package com.example.grupoes.projetoes.util;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.support.v7.widget.RecyclerView;
-import android.text.Html;
-import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,8 +12,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.grupoes.projetoes.R;
-import com.example.grupoes.projetoes.activities.ProductActivity;
-import com.example.grupoes.projetoes.beans.AddProductBean;
+import com.example.grupoes.projetoes.presentation.ui.activities.ProductActivity;
 import com.example.grupoes.projetoes.models.Product;
 
 import java.util.List;
@@ -51,10 +47,11 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.CustomVi
         customViewHolder.imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.d("ADAPTER", "CHAMOU ONCLICK");
                 Intent i = new Intent(mContext, ProductActivity.class);
                 i.putExtra("PRODUCT_NAME", item.getProductName());
+                i.putExtra("POINT_NAME", item.getPointOfSale());
                 mContext.startActivity(i);
+                ((Activity) mContext).finish();
             }
         });
 

@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
 
-    tools:context="com.example.grupoes.projetoes.activities.EditProductActivity">
+    tools:context="com.example.grupoes.projetoes.presentation.ui.activities.EditProductActivity">
 
     <Button
         android:layout_height="30sp"
@@ -60,15 +60,6 @@
         android:id="@+id/editNameProductText"
         android:layout_below="@+id/editProductNameTextView"
         android:layout_alignStart="@+id/editProductNameTextView" />
-
-    <TextView
-        android:text="@string/editProductImagemButton"
-        android:layout_width="wrap_content"
-        android:id="@+id/editProductImagemButton"
-        android:layout_height="36sp"
-        android:textColor="@color/colorAccent"
-        android:layout_below="@+id/editImageProductView"
-        android:layout_centerHorizontal="true" />
 
 
     <Button
@@ -129,5 +120,14 @@
         android:id="@+id/editPriceProductTextView"
         android:layout_below="@+id/editDescriptionProductText"
         android:layout_alignStart="@+id/editDescriptionProductText" />
+
+    <TextView
+        android:text="@string/editProductImagemButton"
+        android:layout_width="wrap_content"
+        android:id="@+id/editProductImagemButton"
+        android:layout_height="36sp"
+        android:textColor="@color/colorAccent"
+        android:layout_below="@+id/editImageProductView"
+        android:layout_centerHorizontal="true" />
 
 </RelativeLayout>

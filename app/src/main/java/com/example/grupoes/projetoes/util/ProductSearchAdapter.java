@@ -1,18 +1,17 @@
 package com.example.grupoes.projetoes.util;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.grupoes.projetoes.R;
-import com.example.grupoes.projetoes.activities.PointOfSaleActivity;
-import com.example.grupoes.projetoes.activities.ProductActivity;
-import com.example.grupoes.projetoes.models.PointOfSale;
+import com.example.grupoes.projetoes.domain.repository.ProductsRepository;
+import com.example.grupoes.projetoes.presentation.ui.activities.ProductActivity;
 import com.example.grupoes.projetoes.models.Product;
 
 import java.util.List;
@@ -69,7 +68,9 @@ public class ProductSearchAdapter extends RecyclerView.Adapter<ProductSearchAdap
         public void onClick(View view) {
             Intent i = new Intent(context, ProductActivity.class);
             i.putExtra("PRODUCT_NAME", nameTextView.getText());
+            i.putExtra("POINT_NAME", ProductsRepository.getInstance().findProduct(nameTextView.getText().toString()).getPointOfSale());
             context.startActivity(i);
+            ((Activity) context).finish();
         }
     }
 }

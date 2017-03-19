@@ -8,16 +8,10 @@ import android.widget.Toast;
 
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.example.grupoes.projetoes.activities.ProductActivity;
-import com.example.grupoes.projetoes.beans.DeletePointOfSaleBean;
 import com.example.grupoes.projetoes.beans.DeleteProductBean;
-import com.example.grupoes.projetoes.beans.EditPointOfSaleBean;
 import com.example.grupoes.projetoes.beans.EditProductBean;
-import com.example.grupoes.projetoes.custom_callbacks.PointsOperationCallback;
 import com.example.grupoes.projetoes.localstorage.SessionStorage;
-import com.example.grupoes.projetoes.models.PointOfSale;
 import com.example.grupoes.projetoes.models.Product;
-import com.example.grupoes.projetoes.request_handlers.PointOfSaleHandler;
 import com.example.grupoes.projetoes.request_handlers.ProductHandler;
 import com.example.grupoes.projetoes.util.UtilOperations;
 
@@ -166,8 +160,6 @@ public class ProductController {
                     }
                 });
     }
-
-
 
     public Product findProductByName(String productName) {
         if (products.size() > 0) {

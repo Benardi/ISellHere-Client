@@ -5,7 +5,7 @@
     android:id="@+id/activity_point_of_sale"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.grupoes.projetoes.activities.PointOfSaleActivity">
+    tools:context="com.example.grupoes.projetoes.presentation.ui.activities.PointOfSaleActivity">
 
     <include
         layout="@layout/toolbar_init" />
@@ -87,30 +87,32 @@
 
             <RelativeLayout
                 android:layout_width="fill_parent"
-                android:layout_height="?android:attr/listPreferredItemHeight"
                 android:padding="6dip"
                 android:layout_alignParentTop="true"
-                android:layout_alignParentStart="true">
+                android:layout_alignParentStart="true"
+                android:layout_height="70dip">
+
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:ellipsize="marquee"
+                    android:text="DESCRIPTION"
+                    android:maxLines="4"
+                    android:lines="4"
+                    android:textSize="12sp"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignParentStart="true"
+                    android:id="@+id/pos_description_textview"
+                    android:layout_height="35dip" />
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:layout_alignParentTop="true"
                     android:layout_alignWithParentIfMissing="true"
                     android:gravity="center_vertical"
                     android:text="Description"
-                    android:textSize="16sp" />
-
-                <TextView
-                    android:layout_width="fill_parent"
-                    android:layout_height="26dip"
-                    android:ellipsize="marquee"
-                    android:text="DESCRIPTION"
-                    android:textSize="12sp"
-                    android:layout_alignParentBottom="true"
-                    android:layout_alignParentStart="true"
-                    android:id="@+id/pos_description_textview" />
+                    android:textSize="16sp"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentStart="true" />
 
             </RelativeLayout>
 
@@ -118,7 +120,7 @@
 
             <Space
                 android:layout_width="match_parent"
-                android:layout_height="15sp" />
+                android:layout_height="5sp" />
 
             <TextView
                 android:layout_width="match_parent"

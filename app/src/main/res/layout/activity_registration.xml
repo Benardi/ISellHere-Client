@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.example.grupoes.projetoes.activities.RegistrationActivity">
+    tools:context="com.example.grupoes.projetoes.presentation.ui.activities.RegistrationActivity">
 
     <include
         layout="@layout/toolbar_init" />
@@ -21,7 +21,9 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:layout_marginLeft="15sp"
+            android:layout_marginRight="15sp">
 
             <TextView
                 android:layout_width="match_parent"
