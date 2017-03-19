@@ -64,7 +64,7 @@ public class AddPointInteractorImpl extends AbstractInteractor implements AddPoi
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         error.printStackTrace();
-                        notifyError("It is all wrong.");
+                        notifyError("It was not possible to add the point. Try again later.");
                     }
                 });
     }

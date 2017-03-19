@@ -67,7 +67,7 @@ public class DeletePointInteractorImpl extends AbstractInteractor implements Del
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         error.printStackTrace();
-                        notifyError("It is all wrong.");
+                        notifyError("It was not possible to delete the point. Try again later.");
                     }
                 });
     }

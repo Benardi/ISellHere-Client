@@ -90,7 +90,7 @@ public class EditProductPresenterImpl extends AbstractPresenter implements EditP
             }
 
             if (InputValidator.isPriceInvalid(bean.getProductPrice())) {
-                invalidInputs.add(new InvalidInput(InputType.ADDPRODUCT_PRICE, "Invalid price. Example of valid price: 100,00"));
+                invalidInputs.add(new InvalidInput(InputType.ADDPRODUCT_PRICE, "Invalid price. Example of valid price: 100.00"));
             }
 
             if (invalidInputs.size() == 0) {

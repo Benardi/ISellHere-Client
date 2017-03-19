@@ -92,7 +92,7 @@ public class GetProductsInteractorImpl extends AbstractInteractor implements Get
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         error.printStackTrace();
-                        notifyError("It is all wrong");
+                        notifyError("It was not possible to retrieve the products. Try again later.");
                     }
 
                 });

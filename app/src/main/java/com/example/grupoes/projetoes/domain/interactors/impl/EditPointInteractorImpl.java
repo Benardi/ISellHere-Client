@@ -71,7 +71,7 @@ public class EditPointInteractorImpl extends AbstractInteractor implements EditP
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         error.printStackTrace();
-                        notifyError("It is all wrong.");
+                        notifyError("It was not possible to edit the point. Try again later.");
                     }
                 });
     }

@@ -67,7 +67,7 @@ public class EditPasswordInteractorImpl extends AbstractInteractor implements Ed
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         error.printStackTrace();
-                        notifyError("It is all wrong.");
+                        notifyError("It was not possible to change the password. Try again later.");
                     }
                 });
     }

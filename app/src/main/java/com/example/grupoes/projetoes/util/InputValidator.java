@@ -12,7 +12,7 @@ public class InputValidator {
     public static final String EMAIL_REGEXP = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@" + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
     public static final String NAME_REGEXP = "^[a-zA-Z0-9à-úÀ-Ú .,!?_-]{1,20}$";
     public static final String DESCRIPTION_REGEXP = "^[a-zA-Z0-9à-úÀ-Ú .,!?_-]{0,255}$";
-    public static final String PRICE_REGEXP = "^[0-9,.]{1,6}$";
+    public static final String PRICE_REGEXP = "^[0-9.]{1,6}$";
 
     public static boolean isEmailInvalid(String email) {
         return isEmpty(email) || !Pattern.matches(EMAIL_REGEXP, email);
@@ -38,7 +38,7 @@ public class InputValidator {
         try {
             Double.parseDouble(price);
         } catch(Exception e) {
-            return false;
+            return true;
         }
 
         return isEmpty(price) || !Pattern.matches(PRICE_REGEXP, price);

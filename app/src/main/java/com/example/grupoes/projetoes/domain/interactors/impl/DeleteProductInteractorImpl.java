@@ -67,7 +67,7 @@ public class DeleteProductInteractorImpl extends AbstractInteractor implements D
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         error.printStackTrace();
-                        notifyError("It is all wrong.");
+                        notifyError("It was not possible to delete the product. Try again later.");
                     }
                 });
     }
