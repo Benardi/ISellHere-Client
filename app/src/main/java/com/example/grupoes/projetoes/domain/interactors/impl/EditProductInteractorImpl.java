@@ -67,7 +67,7 @@ public class EditProductInteractorImpl extends AbstractInteractor implements Edi
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         error.printStackTrace();
-                        notifyError("It is all wrong.");
+                        notifyError("It was not possible to edit the product. Try again later.");
                     }
                 });
     }

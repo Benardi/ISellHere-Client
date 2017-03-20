@@ -2,6 +2,7 @@ package com.example.grupoes.projetoes.presentation.presenters.factory;
 
 import com.example.grupoes.projetoes.domain.executor.impl.ThreadExecutor;
 import com.example.grupoes.projetoes.presentation.presenters.api.AddPointFragmentPresenter;
+import com.example.grupoes.projetoes.presentation.presenters.api.AddProductPresenter;
 import com.example.grupoes.projetoes.presentation.presenters.api.EditPointPresenter;
 import com.example.grupoes.projetoes.presentation.presenters.api.EditProductPresenter;
 import com.example.grupoes.projetoes.presentation.presenters.api.LoginPresenter;
@@ -11,6 +12,7 @@ import com.example.grupoes.projetoes.presentation.presenters.api.ViewMapFragment
 import com.example.grupoes.projetoes.presentation.presenters.api.ViewPointPresenter;
 import com.example.grupoes.projetoes.presentation.presenters.api.ViewProductPresenter;
 import com.example.grupoes.projetoes.presentation.presenters.impl.AddPointFragmentPresenterImpl;
+import com.example.grupoes.projetoes.presentation.presenters.impl.AddProductPresenterImpl;
 import com.example.grupoes.projetoes.presentation.presenters.impl.EditPointPresenterImpl;
 import com.example.grupoes.projetoes.presentation.presenters.impl.EditProductPresenterImpl;
 import com.example.grupoes.projetoes.presentation.presenters.impl.LoginPresenterImpl;
@@ -74,5 +76,9 @@ public class PresenterFactory {
 
     public ViewProductPresenter createViewProductPresenter(ViewProductPresenter.View view) {
         return new ViewProductPresenterImpl(ThreadExecutor.getInstance(), MainThreadImpl.getInstance(), view);
+    }
+
+    public AddProductPresenter createAddProductPresenter(AddProductPresenter.View view) {
+        return new AddProductPresenterImpl(ThreadExecutor.getInstance(), MainThreadImpl.getInstance(), view);
     }
 }

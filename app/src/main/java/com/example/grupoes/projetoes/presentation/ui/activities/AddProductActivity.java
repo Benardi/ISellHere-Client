@@ -28,25 +28,38 @@ import com.example.grupoes.projetoes.beans.AddProductBean;
 import com.example.grupoes.projetoes.domain.repository.ProductsRepository;
 import com.example.grupoes.projetoes.localstorage.SessionStorage;
 import com.example.grupoes.projetoes.models.Product;
+import com.example.grupoes.projetoes.presentation.presenters.api.AddProductPresenter;
+import com.example.grupoes.projetoes.presentation.presenters.factory.PresenterFactory;
 import com.example.grupoes.projetoes.request_handlers.ProductHandler;
+import com.example.grupoes.projetoes.util.InputType;
+import com.example.grupoes.projetoes.util.InvalidInput;
 import com.example.grupoes.projetoes.util.UtilOperations;
 
 import org.json.JSONObject;
 
-public class AddProductActivity extends AppCompatActivity {
+import java.util.List;
+
+public class AddProductActivity extends AppCompatActivity implements AddProductPresenter.View {
 
     private static final int RESULT_LOAD_IMAGE = 1;
-    ImageView productImage;
-    EditText productName;
-    EditText productDescription;
-    Button selectImage;
-    Button createPoduct;
-    EditText productPrice;
-    String pointOfSale;
+    private ImageView productImage;
+    private EditText productName;
+    private EditText productDescription;
+    private Button selectImage;
+    private Button createPoduct;
+    private EditText productPrice;
+    private String pointOfSale;
+
+    private AddProductPresenter presenter;
+    private AddProductBean bean;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_product);
+
+        PresenterFactory.getInstance().createAddProductPresenter(this);
+
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, 2);
         }
@@ -80,21 +93,16 @@ public class AddProductActivity extends AppCompatActivity {
             createPoduct.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if(productName.getText().toString().equals("") || productDescription.getText().toString().equals("") || productPrice.getText().toString().equals("")){
-                        Toast.makeText(getApplicationContext(), "Field cannot be empty!", Toast.LENGTH_LONG).show();
-                    }else{
-
                         SessionStorage storage =  new SessionStorage(ISellHereApplication.getInstance());
 
                         final String creatorName = storage.getLoggedUser().getUsername();
                         final String nameProduct = productName.getText().toString();
                         final String descriptionProduct = productDescription.getText().toString();
                         final String imageProduct = UtilOperations.bitMapToString(((BitmapDrawable)productImage.getDrawable()).getBitmap());
-                        final double priceProduct = Double.parseDouble(String.valueOf(productPrice.getText().toString()));
 
-                        final AddProductBean productBean = new AddProductBean(creatorName, pointOfSale, nameProduct, descriptionProduct, String.valueOf(priceProduct), imageProduct);
+                        presenter.requestAddProduct(creatorName, pointOfSale, nameProduct, descriptionProduct, productPrice.getText().toString(), imageProduct);
 
-                        ProductHandler.getInstance().requestAddProduct(productBean,
+                        /*ProductHandler.getInstance().requestAddProduct(productBean,
                                 new SessionStorage(ISellHereApplication.getInstance()).getToken(),
                                 new Response.Listener<JSONObject>() {
                                     @Override
@@ -120,9 +128,9 @@ public class AddProductActivity extends AppCompatActivity {
                                         }
                                     }
                                 }
-                        );
+                        );*/
+
                     }
-                }
             });
 
         }
@@ -148,4 +156,41 @@ public class AddProductActivity extends AppCompatActivity {
             }
 
         }
+
+    @Override
+    public void onSuccessfulAdd() {
+        Toast.makeText(getApplicationContext(), "You have successfully created a product.", Toast.LENGTH_LONG).show();
+        Intent i = new Intent(AddProductActivity.this, ProductActivity.class);
+        i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        i.putExtra("PRODUCT_NAME", productName.getText().toString());
+        i.putExtra("POINT_NAME", pointOfSale);
+        startActivity(i);
+        finish();
+    }
+
+    @Override
+    public void onInvalidInput(List<InvalidInput> invalidInputs) {
+        for (InvalidInput invalidInput : invalidInputs) {
+            InputType type = invalidInput.getType();
+            String error = invalidInput.getError();
+
+            if (type == InputType.ADDPRODUCT_NAME) {
+                productName.setError(error);
+            } else if (type == InputType.ADDPRODUCT_DESCRIPTION) {
+                productDescription.setError(error);
+            } else if (type == InputType.ADDPRODUCT_PRICE) {
+                productPrice.setError(error);
+            }
+        }
+    }
+
+    @Override
+    public void setPresenter(AddProductPresenter presenter) {
+        this.presenter = presenter;
+    }
+
+    @Override
+    public void showError(String message) {
+        Toast.makeText(this, message, Toast.LENGTH_LONG);
+    }
 }

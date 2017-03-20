@@ -14,7 +14,8 @@ public interface AddProductPresenter extends BasePresenter {
     interface View extends BaseView {
         void onSuccessfulAdd();
         void onInvalidInput(List<InvalidInput> invalidInputs);
+        void setPresenter(AddProductPresenter presenter);
     }
 
-    void requestAddProduct(AddProductBean bean);
+    void requestAddProduct(String creatorName, String pointOfSale, String nameProduct, String descriptionProduct, String productPrice, String imageProduct);
 }

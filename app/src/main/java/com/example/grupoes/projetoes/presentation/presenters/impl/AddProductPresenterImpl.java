@@ -1,5 +1,7 @@
 package com.example.grupoes.projetoes.presentation.presenters.impl;
 
+import android.util.Log;
+
 import com.example.grupoes.projetoes.beans.AddPointOfSaleBean;
 import com.example.grupoes.projetoes.beans.AddProductBean;
 import com.example.grupoes.projetoes.domain.executor.Executor;
@@ -8,6 +10,8 @@ import com.example.grupoes.projetoes.domain.interactors.api.AddPointInteractor;
 import com.example.grupoes.projetoes.domain.interactors.api.AddProductInteractor;
 import com.example.grupoes.projetoes.domain.interactors.impl.AddPointInteractorImpl;
 import com.example.grupoes.projetoes.domain.interactors.impl.AddProductInteractorImpl;
+import com.example.grupoes.projetoes.domain.repository.ProductsRepository;
+import com.example.grupoes.projetoes.models.Product;
 import com.example.grupoes.projetoes.presentation.presenters.api.AddPointFragmentPresenter;
 import com.example.grupoes.projetoes.presentation.presenters.api.AddProductPresenter;
 import com.example.grupoes.projetoes.presentation.presenters.base.AbstractPresenter;
@@ -35,6 +39,8 @@ public class AddProductPresenterImpl extends AbstractPresenter implements AddPro
         this.executor = executor;
         this.mainThread = mainThread;
         this.isRunningAddProduct = false;
+
+        view.setPresenter(this);
     }
 
     @Override
@@ -76,9 +82,11 @@ public class AddProductPresenterImpl extends AbstractPresenter implements AddPro
 
 
     @Override
-    public void requestAddProduct(AddProductBean bean) {
+    public void requestAddProduct(String creatorName, String pointOfSale, String nameProduct, String descriptionProduct, String productPrice, String imageProduct) {
         if (!isRunningAddProduct) {
             List<InvalidInput> invalidInputs = new ArrayList<>();
+
+            AddProductBean bean = new AddProductBean(creatorName, pointOfSale, nameProduct, descriptionProduct, productPrice, imageProduct);
 
             if (InputValidator.isNameInvalid(bean.getProductName())) {
                 invalidInputs.add(new InvalidInput(InputType.ADDPRODUCT_NAME, "The name must have 1 to 20 characters and no special symbols!"));
@@ -89,13 +97,14 @@ public class AddProductPresenterImpl extends AbstractPresenter implements AddPro
             }
 
             if (InputValidator.isPriceInvalid(bean.getProductPrice())) {
-                invalidInputs.add(new InvalidInput(InputType.ADDPRODUCT_PRICE, "Invalid price. Example of valid price: 100,00"));
+                invalidInputs.add(new InvalidInput(InputType.ADDPRODUCT_PRICE, "Invalid price. Example of valid price: 100.00"));
             }
 
             if (invalidInputs.size() == 0) {
                 isRunningAddProduct = true;
                 AddProductInteractor interactor = new AddProductInteractorImpl(executor, mainThread, this, bean);
                 interactor.execute();
+                ProductsRepository.getInstance().getProducts().get(pointOfSale).add(new Product(bean.getCreator(), pointOfSale, bean.getProductName(), bean.getProductComment(), Double.parseDouble(bean.getProductPrice()), bean.getProductImage()));
             } else {
                 view.onInvalidInput(invalidInputs);
             }

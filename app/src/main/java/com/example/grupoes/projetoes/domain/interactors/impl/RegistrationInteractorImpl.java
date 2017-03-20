@@ -63,7 +63,7 @@ public class RegistrationInteractorImpl extends AbstractInteractor implements Re
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         error.printStackTrace();
-                        notifyError("It is all wrong");
+                        notifyError("It was not possible to create the user. Try a different username and email.");
                     }
 
                 });

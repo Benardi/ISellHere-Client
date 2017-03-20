@@ -94,7 +94,7 @@ public class GetPointsInteractorImpl extends AbstractInteractor implements GetPo
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         error.printStackTrace();
-                        notifyError("It is all wrong");
+                        notifyError("It was not possible to retrieve the points. Try again later.");
                     }
 
                 });
