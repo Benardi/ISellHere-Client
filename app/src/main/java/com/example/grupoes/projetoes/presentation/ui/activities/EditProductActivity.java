@@ -1,6 +1,7 @@
 package com.example.grupoes.projetoes.presentation.ui.activities;
 
 import android.Manifest;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
@@ -46,6 +47,7 @@ public class EditProductActivity extends AppCompatActivity implements EditProduc
     TextView buttonGetImageProduct;
     Button close;
     Button save;
+    ImageView imageView;
 
     private Product product;
 
@@ -117,6 +119,7 @@ public class EditProductActivity extends AppCompatActivity implements EditProduc
             buttonGetImageProduct = (TextView) findViewById(R.id.editProductImagemButton);
             save = (Button) findViewById(R.id.saveButtonEditProduct);
             close = (Button) findViewById(R.id.close_edit_product);
+            imageView = (ImageView) findViewById(R.id.product_image);
 
             productName.setText(product.getProductName());
             productPrice.setText(String.valueOf(product.getProductPrice()));
@@ -143,8 +146,7 @@ public class EditProductActivity extends AppCompatActivity implements EditProduc
             int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
             String picturePath = cursor.getString(columnIndex);
             cursor.close();
-
-            ImageView imageView = (ImageView) findViewById(R.id.product_image);
+            imageView = (ImageView) findViewById(R.id.editImageProductView);
             imageView.setImageBitmap(BitmapFactory.decodeFile(picturePath));
         }
     }
@@ -178,6 +180,7 @@ public class EditProductActivity extends AppCompatActivity implements EditProduc
         intent1.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent1);
         finish();
+        Toast.makeText(getApplicationContext(), "Your product has been successfully updated!", Toast.LENGTH_LONG).show();
     }
 
     @Override

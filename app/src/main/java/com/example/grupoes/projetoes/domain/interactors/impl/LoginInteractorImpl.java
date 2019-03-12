@@ -87,7 +87,7 @@ public class LoginInteractorImpl extends AbstractInteractor implements LoginInte
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         error.printStackTrace();
-                        notifyError("Invalid account. Try another time...");
+                        notifyError("User or password invalid");
                     }
 
                 });

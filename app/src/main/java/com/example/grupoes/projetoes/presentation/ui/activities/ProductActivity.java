@@ -59,10 +59,9 @@ public class ProductActivity extends AppCompatActivity implements ViewProductPre
         editProduct.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(getApplicationContext(), EditProductActivity.class);
+                Intent i = new Intent(ProductActivity.this, EditProductActivity.class);
                 i.putExtra("PRODUCT_NAME", productName);
                 i.putExtra("POINT_NAME", pointName);
-                i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(i);
             }
         });
