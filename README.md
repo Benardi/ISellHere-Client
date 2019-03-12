@@ -20,7 +20,7 @@ This is the default client application for the ISellHere platform. It is an Andr
 * **RaviLeite** - [ravileite](https://github.com/ravileite)
 * **Wesley Silva** - [SILVAWesley](https://github.com/SILVAWesley)
 
-See also the list of [contributors](https://github.com/Benardi/numerical_methods/contributors) who participated in this project.
+See also the list of [contributors](https://github.com/isellhere/ISellHere-Client/contributors) who participated in this project.
 
 ## License
 
